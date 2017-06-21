@@ -1,5 +1,8 @@
 #/bin/bash
 
+dpath = "/home/pi/Documents/Dropbox-Uploader/"
+path = "/home/pi/Documents/AutoHome/rpi_scripts"
+
 while true; do
     resp=$(/home/pi/Documents/Dropbox-Uploader/dropbox_uploader.sh list)
     if [ "${#resp}" -ne 23 ]; then
@@ -9,17 +12,22 @@ while true; do
         param2=$(echo $substr | cut -d'_' -f 3)
         
         if [ "$id" == "tvchan" ]; then
-            /home/pi/Documents/tv_scripts/chng_channel $param1 $param2
+            if [ "$param1" != "up" && "$param1" != "down" ]; then
+               path/chng_channel $param1 $param2
+            else
+               nums = $param1 | sed 's/./&/g'
+               path/chng_channel $nums
+            fi 
         elif [ "$id" == "tvvolume" ]; then
-            /home/pi/Documents/tv_scripts/chng_volume $param1 $param2
+            path/chng_volume $param1 $param2
         elif [ "$id" == "tvinput" ]; then 
-            /home/pi/Documents/tv_scripts/chng_input $param1
+            path/tv_scripts/chng_input $param1
         elif [ "$id" == "tvkey" ]; then 
-            /home/pi/Documents/tv_scripts/key $param1
+            path/tv_scripts/key $param1
         else
-            /home/pi/Documents/socket_scripts/socket $param1 $param2
+            path/socket_scripts/socket $param1 $param2
         fi
-        /home/pi/Documents/Dropbox-Uploader/dropbox_uploader.sh delete $substr
+        dropbox_uploader.sh delete $substr
 
     fi
     sleep 1

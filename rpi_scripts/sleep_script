@@ -1,0 +1,11 @@
+#!/bin/bash
+
+path="$HOME/Documents/socket_scripts/socket"
+
+"$path" 4 ON
+
+"$path" 3 ON
+
+"$path" 2 OFF
+
+"$path" 5 OFF

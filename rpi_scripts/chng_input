@@ -1,0 +1,29 @@
+#!/bin/bash
+
+/etc/init.d/lirc start
+
+irsend SEND_ONCE insignia KEY_MEDIA
+sleep .01
+count=0
+num=1
+if [ "$2" != "" ]; then 
+	num=$2
+fi
+if [ "$1" = "up" ]; then	
+	while [ "$count" -lt "$num" ]; do
+		irsend SEND_ONCE insignia KEY_UP
+		sleep .01
+		((count++))
+	done
+else 
+	while [ "$count" -lt "$num" ]; do 
+		irsend SEND_ONCE insignia KEY_DOWN
+		sleep .01
+		((count++))
+	done	
+fi
+irsend SEND_ONCE insignia KEY_ENTER
+sleep .01
+irsend SEND_ONCE insignia KEY_ENTER
+
+/etc/init.d/lirc stop

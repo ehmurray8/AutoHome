@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [ "$1" != "" ]; then
+    irsend SEND_ONCE insignia KEY_$1
+    sleep .01
+fi
+
+k=$1
+
+if [ "$2" != "" ]; then
+    if [ "$2" = "$k" ]; then
+        sleep .3
+    fi
+    irsend SEND_ONCE insignia KEY_$2
+    sleep .01
+fi
+
+k=$2
+if [ "$3" != "" ]; then
+    if [ "$3" = "$k" ]; then
+        sleep .3
+    fi
+    irsend SEND_ONCE insignia KEY_$3
+fi

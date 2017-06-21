@@ -1,0 +1,7 @@
+#!/bin/bash
+
+/etc/init.d/lirc start
+
+irsend SEND_ONCE insignia KEY_$1
+
+/etc/init.d/lirc stop

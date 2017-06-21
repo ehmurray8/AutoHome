@@ -1,0 +1,30 @@
+#!/bin/bash
+
+/etc/init.d/lirc start
+	
+sleep 1
+count=0
+num=1
+if [ "$2" != "" ]; then 
+	num=$2
+fi
+if [ "$1" = "up" ]; then	
+	while [ "$count" -lt "$num" ]; do
+		irsend SEND_ONCE insignia KEY_CHANNELUP
+		sleep 1
+		((count++))
+	done
+elif [ "$1" = "down" ]; then
+	while [ "$count" -lt "$num" ]; do 
+		irsend SEND_ONCE insignia KEY_CHANNELDOWN
+		sleep 1
+		((count++))
+	done
+else
+    ./channel $1 $2 $3	
+fi
+irsend SEND_ONCE insignia KEY_ENTER
+sleep 1
+irsend SEND_ONCE insignia KEY_ENTER
+
+/etc/init.d/lirc stop

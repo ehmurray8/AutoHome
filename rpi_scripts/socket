@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CODE1_on=70963
+CODE1_off=70972
+
+CODE2_on=71107
+CODE2_off=71116
+
+CODE3_on=71427
+CODE3_off=71436
+
+CODE4_on=72963
+CODE4_off=72972
+
+CODE5_on=79107
+CODE5_off=79116
+
+codeStr=CODE"$1"_"$2"
+eval code=\$$codeStr
+
+/home/pi/433Utils/RPi_utils/codesend "$code" -l 200

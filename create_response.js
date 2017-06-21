@@ -1,3 +1,4 @@
+var unirest = require("unirest");
 var helpers = require("./helpers.js"); 
 
 function getResponse(intent, session, callback, context) {
@@ -78,9 +79,9 @@ function getResponse(intent, session, callback, context) {
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
 
-function dropbox_post(context, folderName) {
+async function dropbox_post(context, folderName) {
     var access_token = "M6jFx4joPvoAAAAAAAAAfYYXa_leASaFgHILerQ5ozH6iUdFgI_TR4PyCloVzByR"
-    var req = unirest("POST", "https://api.dropboxapi.com/2/files/create_folder");
+    /*var req = unirest("POST", "https://api.dropboxapi.com/2/files/create_folder");
 
 	req.headers({
   	  "content-type": "application/json",
@@ -101,5 +102,14 @@ function dropbox_post(context, folderName) {
 		if (res.error) throw new Error(res.error);
         context.succeed("Finish");
 		console.log(res.body);
-	});
+	});*/
+     
+    var obj = {};
+    obj.path = folderName;
+    obj.autorename = false;
+    var json = JSON.stringify(obj);
+    const val = await unirest.post("https://api.dropboxapi.com/2/files/create_folder")
+          .headers({"content-type":"application/json", "authorization":"Bearer " + access_token})
+          .send(json)
+          .end().exec();
 }

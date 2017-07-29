@@ -10,7 +10,7 @@ var publish = function publish() {
     function publishSampleMessage() {
         console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
         var publishConfig = {
-            channel : "hello_world",
+            channel : "auto_home",
             message : "Hello from PubNub Docs!"
         };
         pubnub.publish(publishConfig, function(status, response) {
@@ -33,9 +33,9 @@ var publish = function publish() {
     });
     console.log("Subscribing..");
     pubnub.subscribe({
-        channels: ['hello_world'] 
+        channels: ['auto_home'] 
     });
-}
+};
 
 if (require.main === module) {
     publish();

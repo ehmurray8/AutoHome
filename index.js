@@ -1,51 +1,115 @@
+var Alexa = require('alexa-sdk');
+var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
 var PubNub = require("pubnub");
-var resp = require("./helpers.js");
+var helpers = require("./helpers.js");
 var consts = require("./constants.js");
 
-// Route the incoming request based on type (LaunchRequest, IntentRequest,
-// etc.) The JSON body of the request is provided in the event parameter.
-exports.handler = function (event, context) {
-	try {
-        console.log("event.session.application.applicationId=" +
-                event.session.application.applicationId);
+pubnub = new PubNub({
+        publishKey : consts.PUBNUB_KEY_P,
+        subscribeKey : consts.PUBNUB_KEY_S
+});
 
-        /**
-         * Uncomment this if statement and populate with your 
-         * skill's application ID to prevent someone else from
-         * configuring a skill that sends requests to this function.
-         */
-        /*if (event.session.application.applicationId 
-               !== "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307") {
-             context.fail("Invalid Application ID");
-        }*/
+exports.handler = function(event, context, callback) {
+    var alexa = Alexa.handler(event, context);
+    alexa.APP_ID = APP_ID;
 
-        pubnub = new PubNub({
-            publishKey : consts.PUBNUB_KEY
-        });
+    // To enable string internationalization (i18n) features, set a resources object.
+    alexa.resources = languageStrings;
+    alexa.registerHandlers(handlers);
+    alexa.execute();
+};
 
-        if (event.session.new) {
-            onSessionStarted(
-               {requestId: event.request.requestId}, event.session);
+var handlers = {
+    //Use LaunchRequest, instead of NewSession if you want to use the one-shot model
+    // Alexa, ask [my-skill-invocation-name] to (do something)...
+    'LaunchRequest': function () {
+        this.attributes.speechOutput = this.t("WELCOME_MESSAGE", this.t("SKILL_NAME"));
+        // If the user either does not reply to the welcome message or says something that is not
+        // understood, they will be prompted again with this text.
+        this.attributes.repromptSpeech = this.t("WELCOME_REPROMPT");
+        this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
+    },
+    'SocketIntent': function() {
+        rets = handleUserIntent(consts.SOCK_INTENT, this.event.request.intent);        
+        speechOutput = rets[0];
+        repromptSpeech = "Another Command?";
+        speechOutput += repromptSpeech; 
+        this.attributes.speechOutput = speechOutput; 
+        this.attributes.repromptSpeech = repromptSpeech;
+
+        //publishCommand(rets[1]);
+        this.emit(':ask', speechOutput, repromptSpeech);
+    },
+    'TVChannelIntent': function() {
+        rets = handleUserIntent(consts.CHAN_INTENT, this.event.request.intent);        
+        speechOutput = rets[0];
+        repromptSpeech = "Another Command?";
+        speechOutput += repromptSpeech; 
+        this.attributes.speechOutput = speechOutput; 
+        this.attributes.repromptSpeech = repromptSpeech;
+
+        //publishCommand(rets[1]);
+        this.emit(':ask', speechOutput, repromptSpeech);
+    },
+    'TVVolumeIntent': function() {
+        rets = handleUserIntent(consts.VOL_INTENT, this.event.request.intent);        
+        speechOutput = rets[0];
+        repromptSpeech = "Another Command?";
+        speechOutput += repromptSpeech; 
+        this.attributes.speechOutput = speechOutput; 
+        this.attributes.repromptSpeech = repromptSpeech;
+
+        //publishCommand(rets[1]);
+        this.emit(':ask', speechOutput, repromptSpeech);
+    },
+    'TVKeyIntent': function() {
+        rets = handleUserIntent(consts.KEY_INTENT, this.event.request.intent);        
+        speechOutput = rets[0];
+        repromptSpeech = "Another Command?";
+        speechOutput += repromptSpeech; 
+        this.attributes.speechOutput = speechOutput; 
+        this.attributes.repromptSpeech = repromptSpeech;
+
+        //publishCommand(rets[1]);
+        this.emit(':ask', speechOutput, repromptSpeech);
+    },
+    'AMAZON.HelpIntent': function () {
+        this.attributes.speechOutput = this.t("HELP_MESSAGE");
+        this.attributes.repromptSpeech = this.t("HELP_REPROMPT");
+        this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
+    },
+    'AMAZON.RepeatIntent': function () {
+        this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
+    },
+    'AMAZON.StopIntent': function () {
+        this.emit('SessionEndedRequest');
+    },
+    'AMAZON.CancelIntent': function () {
+        this.emit('SessionEndedRequest');
+    },
+    'SessionEndedRequest':function () {
+        this.emit(':tell', this.t("STOP_MESSAGE"));
+    },
+    'Unhandled': function () {
+        this.attributes.speechOutput = this.t("HELP_MESSAGE");
+        this.attributes.repromptSpeech = this.t("HELP_REPROMPT");
+        this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
+    }
+};
+
+var languageStrings = {
+    "en": {
+        "translation": {
+            "SKILL_NAME": "Auto Home",
+            "WELCOME_MESSAGE": consts.WEL_SPEECH_OUT,
+            "WELCOME_REPROMPT": consts.WEL_REPROMPT,
+            "DISPLAY_CARD_TITLE": "Auto Home",
+            "HELP_MESSAGE": "Speak a command to control sockets and TV.",
+            "HELP_REPROMPT": "Commands pertain to TV Volume, TV Channel, TV Input, Remote Key, and Sockets.",
+            "STOP_MESSAGE": "Goodbye!",
+            "REPEAT_MESSAGE": "Try saying repeat.",
+            "NOT_FOUND_MESSAGE": "I\'m sorry, I currently do not know ",
         }
-
-        if (event.request.type === "LaunchRequest") {
-            onLaunch(event.request,
-                event.session,  
-                function callback(sessionAttributes, speechletResponse) {
-                    context.succeed(buildResponse(
-                    sessionAttributes, speechletResponse));
-                });
-        } else if (event.request.type === "IntentRequest") {
-            onIntent(event.request,
-                event.session,
-                function callback(sessionAttributes, speechletResponse) 
-                    {}, context);
-        } else if (event.request.type === "SessionEndedRequest") {
-            onSessionEnded(event.request, event.session);
-            context.succeed();
-        }
-    } catch (e) {
-        context.fail("Exception: " + e);
     }
 };
 
@@ -53,6 +117,7 @@ exports.handler = function (event, context) {
  * PubNub Publish.
  */
 function publishCommand(message) {
+    
     console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
     var publishConfig = {
         channel : consts.PUBNUB_CHANNEL,
@@ -64,87 +129,7 @@ function publishCommand(message) {
     });
 }
 
-
-/**
- * Called when the session starts.
- */
-function onSessionStarted(sessionStartedRequest, session) {
-    console.log("onSessionStarted requestId=" + sessionStartedRequest.requestId +
-        ", sessionId=" + session.sessionId);
-}
-
-/**
- * Called when the user launches the skill without specifying what they want.
- */
-function onLaunch(launchRequest, session, callback) {
-    console.log("onLaunch requestId=" + launchRequest.requestId +
-        ", sessionId=" + session.sessionId);
-
-    // Dispatch to your skill's launch.
-    getWelcomeResponse(callback);
-}
-
-/**
- * Called when the user specifies an intent for this skill.
- */
-function onIntent(intentRequest, session, callback, context) {
-    console.log("onIntent requestId=" + intentRequest.requestId +
-        ", sessionId=" + session.sessionId);
-
-    var intent = intentRequest.intent;
-    var intentName = intentRequest.intent.name;
-
-    // Dispatch to your skill's intent handlers
-    if (conts.CHAN_INTENT === intentName || consts.VOL_INTENT === intentName ||
-           consts.SOCK_INTENT === intentName || consts.INPUT_INTENT === intentName ||
-           consts.KEY_INTENT === intentName) {
-        resp.getResponse(intent, session, callback, context);
-    } else if ("AMAZON.HelpIntent" === intentName) {
-        getWelcomeResponse(callback);
-        context.succeed(buildResponse(sessionAttributes, speechletResponse));
-    } else if ("AMAZON.StopIntent" === intentName || "AMAZON.CancelIntent" === intentName) {
-        handleSessionEndRequest(callback);
-        context.succeed(buildResponse(sessionAttributes, speechletResponse));
-    }
-}
-
-/**
- * Called when the user ends the session.
- * Is not called when the skill returns shouldEndSession=true.
- */
-function onSessionEnded(sessionEndedRequest, session) {
-    console.log("onSessionEnded requestId=" + sessionEndedRequest.requestId +
-        ", sessionId=" + session.sessionId);
-    // Add cleanup logic here
-}
-
-
-// --------------- Functions that control the skill's behavior -----------------------
-
-function getWelcomeResponse(callback) {
-    // If we wanted to initialize the session to have some attributes we could add those here.
-    var sessionAttributes = {};
-    var cardTitle = consts.WEL_TITLE;
-    var speechOutput = consts.WEL_SPEECH_OUT;
-    var repromptText = consts.WEL_REPROMPT;
-    var shouldEndSession = false;
-
-    callback(sessionAttributes,
-        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
-}
-
-function handleSessionEndRequest(callback) {
-    var cardTitle = consts.END_TITLE;
-    var speechOutput = consts.END_SPEECH_OUT;
-    
-	// Setting this to true ends the session and exits the skill.
-    var shouldEndSession = true;
-
-    callback({}, buildSpeechletResponse(cardTitle, speechOutput, null, shouldEndSession));
-}
-
-function getResponse(intent, session, callback, context) {
-    var cardTitle = intent.name;
+function handleUserIntent(cardTitle, intent) {
     var repromptText = "";
     var sessionAttributes = {};
     var shouldEndSession = false;
@@ -159,18 +144,20 @@ function getResponse(intent, session, callback, context) {
     var num = consts.NUM_KEY;
     if(cardTitle === consts.SOCK_INTENT) {
         body[func_key] = consts.SOCK_FUNC;
-        var sockType = consts.SOCK.TYPE_KEY;
+        var sockType = consts.SOCK_TYPE_KEY;
         var sockState = consts.SOCK_STATE_KEY;
-        var socketSlot = intent.slots.socket;
-        if(socketSlot.value == consts.TV_SOCKET) {
-            speechOutput = "TV Power function requested.";
+        var socketSlot = intent.slots.socket; 
+        if(socketSlot.value == consts.TV_SOCKET) 
+        { 
+            speechOutput = "TV Power function requested."; 
             body[sockType] = consts.TV_SOCKET;
         } else {
             var stateSlot = intent.slots.state;
-            speechOutput = "Turn ${stateSlot.value} ${socketSlot.value}";
-            body[sockType] = socketSlot.value;
+            speechOutput = "Turn " + stateSlot.value + " " + helpers.convertSocket(socketSlot.value) + ".";
+            body[sockType] = helpers.convertSocket(socketSlot.value);
             body[sockState] = stateSlot.value.toUpperCase();
         }
+        publishCommand(body);
     } else if(cardTitle === consts.CHAN_INTENT) {
         body[func_key] = consts.CHAN_FUNC;
         var chan = consts.CHAN_NUM_KEY;
@@ -178,38 +165,40 @@ function getResponse(intent, session, callback, context) {
         dirSlot = intent.slots.direction;
         if(dirSlot.value) {
             if(numSlot.value) {
-                speechOutput = "Channel Direction was ${dirSlot.value}, and Number was ${numSlot.value}.";
+                speechOutput = "Channel Direction was " + dirSlot.value + ", and Number was " + numSlot.value + ".";
                 body[dir] = dirSlot.value.toUpperCase();
                 body[num] = Number(numSlot.value);
             } else {
-                speechOutput = "Channel ${dirSlot.value} by 1.";
+                speechOutput = "Channel " + dirSlot.value + "by 1.";
                 body[dir] = dirSlot.value.toUpperCase();
                 body[num] = 1;
             }
         } else {
             var chanSlot = intent.slots.channel;
-            speechOutput = "Change channel to channel ${convertChannel(chanSlot.value)}.";
-            body[chan] = chanSlot.value;
+            speechOutput = "Change channel to channel " + helpers.convertChannel(chanSlot.value) + ".";
+            body[chan] = helpers.convertChannel(chanSlot.value);
         }
+        publishCommand(body);
     } else if (cardTitle === consts.VOL_INTENT) {
         body[func_key] = consts.VOL_FUNC;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = "Volume Direction was ${dirSlot.value}, and Number was ${numSlot.value}.";
+            speechOutput = "Volume Direction was " + dirSlot.value + ", and Number was " + numSlot.value + ".";
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         } else {
-            speechOutput = "Volume ${dirSlot.value} by 1.";
+            speechOutput = "Volume " + dirSlot.value + "by 1.";
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = 1;
         }
+        publishCommand(body);
     } else if (cardTitle === consts.INPUT_INTENT) {
         body[func_key] = consts.CHAN_FUNC;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = "Input Direction was ${dirSlot.value}, and Number was ${numSlot.value}.";
+            speechOutput = "Input Direction was " + dirSlot.value + ", and Number was " + numSlot.value + ".";
             body[dir] = dirSlot.value.toUperCase();
             body[num] = Number(numSlot.value);
         } else {
@@ -217,23 +206,22 @@ function getResponse(intent, session, callback, context) {
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         }
+        publishCommand(body);
     } else if (cardTitle === consts.KEY_INTENT) {
-        body[func_key] = "Key";
+        body[func_key] = consts.KEY_FUNC;
         var type = "Key Type";
         var keySlot = intent.slots.key;
-        speechOutput = "You pressed key ${convertKey(keySlot.value)}.";
-        body[type] = keySlot.value;
+        speechOutput = "You pressed key " + helpers.convertKey(keySlot.value) + ".";
+        body[type] = helpers.convertKey(keySlot.value);
+        publishCommand(body);
     } else {
         speechOutput = "Invalid Command.";
         publish = false;
     }
 
     if (publish) {
-        publishCommand(body)
-    }
-
-    repromptText = "Another Command?";
-
-    callback(sessionAttributes,
-        buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
+        //publishCommand(body);
+        console.log("Published");
+    }   
+    return [speechOutput, body];
 }

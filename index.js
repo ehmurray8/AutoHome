@@ -4,8 +4,8 @@ var resp = require("./create_response.js");
 // etc.) The JSON body of the request is provided in the event parameter.
 exports.handler = function (event, context) {
 	try {
-        console.log("event.session.application.applicationId=" 
-               + event.session.application.applicationId);
+        console.log("event.session.application.applicationId=" +
+                event.session.application.applicationId);
 
         /**
          * Uncomment this if statement and populate with your 
@@ -74,9 +74,9 @@ function onIntent(intentRequest, session, callback, context) {
     var intentName = intentRequest.intent.name;
 
     // Dispatch to your skill's intent handlers
-    if ("TVChannelIntent" === intentName || "TVVolumeIntent" === intentName 
-          || "SocketIntent" === intentName || "TVInputIntent" === intentName 
-          || "TVKeyIntent" === intentName) {
+    if ("TVChannelIntent" === intentName || "TVVolumeIntent" === intentName ||
+           "SocketIntent" === intentName || "TVInputIntent" === intentName ||
+           "TVKeyIntent" === intentName) {
         resp.getResponse(intent, session, callback, context);
     } else if ("AMAZON.HelpIntent" === intentName) {
         getWelcomeResponse(callback);
@@ -122,7 +122,6 @@ function handleSessionEndRequest(callback) {
     callback({}, buildSpeechletResponse(cardTitle, speechOutput, null, shouldEndSession));
 }
 
-<<<<<<< HEAD
 function getResponse(intent, session, callback, context) {
     var cardTitle = intent.name;
     var repromptText = "";
@@ -131,138 +130,83 @@ function getResponse(intent, session, callback, context) {
     var speechOutput = "";
     var numSlot = "";
     var dirSlot = "";
-    var response = "";
-    var folderName = "/";
 
+    var body = {};
+    var func_key = "Function Name";
+    var dir = "Direction";
+    var num = "Number";
     if(cardTitle === "SocketIntent") {
+        body[func_key] = "Socket";
+        var sockType = "Socket Type";
+        var sockState = "Socket State";
         var socketSlot = intent.slots.socket;
         if(socketSlot.value == "TV") {
             speechOutput = "TV Power function requested.";
-            response = "sudo ~/Documents/tv_scripts/key POWER;";
-            folderName += "tvkey_" + "POWER";
+            body[sockType] = "TV";
         } else {
             var stateSlot = intent.slots.state;
             speechOutput = "Turn ${stateSlot.value} ${socketSlot.value}";
-            response = "sudo ~/Documents/socket_scripts/socket ${convertSocket(socketSlot.value)} ${stateSlot.value}";
-            folderName += "socket_" + convertSocket(socketSlot.value) + "_" + stateSlot.value;
+            body[sockType] = socketSlot.value;
+            body[sockState] = stateSlot.value.toUpperCase();
         }
     } else if(cardTitle === "TVChannelIntent") {
+        body[func_key] = "Channel";
+        var chan = "Channel Number";
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(dirSlot.value) {
             if(numSlot.value) {
                 speechOutput = "Channel Direction was ${dirSlot.value}, and Number was ${numSlot.value}.";
-                response = "sudo ~/Documents/tv_scripts/chng_channel ${dirSlot.value} ${numSlot.value}";
-                folderName += "tvchan_" + dirSlot.value + "_" + numSlot.value;
+                body[dir] = dirSlot.value.toUpperCase();
+                body[num] = Number(numSlot.value);
             } else {
                 speechOutput = "Channel ${dirSlot.value} by 1.";
-                response = "sudo ~/Documents/tv_scripts/chng_channel ${dirSlot.value}`;
-                folderName += "tvchan_" + dirSlot.value;
+                body[dir] = dirSlot.value.toUpperCase();
+                body[num] = 1;
             }
         } else {
             var chanSlot = intent.slots.channel;
-            speechOutput = `Change channel to channel ${convertChannel(chanSlot.value)}.`;
-            response = `sudo ~/Documents/tv_scripts/chng_channel ${convertChannel(chanSlot.value)}`;
-            folderName += "tvchan_" + convertChannel(chanSlot.value);
+            speechOutput = "Change channel to channel ${convertChannel(chanSlot.value)}.";
+            body[chan] = chanSlot.value;
         }
     } else if (cardTitle === "TVVolumeIntent") {
+        body[func_key] = "Volume";
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = `Volume Direction was ${dirSlot.value}, and Number was ${numSlot.value}.`;
-            response = `sudo ~/Documents/tv_scripts/chng_volume ${dirSlot.value} ${numSlot.value}` ;
-            folderName += "tvvolume_" + dirSlot.value + "_" + numSlot.value;
+            speechOutput = "Volume Direction was ${dirSlot.value}, and Number was ${numSlot.value}.";
+            body[dir] = dirSlot.value.toUpperCase();
+            body[num] = Number(numSlot.value);
         } else {
-            speechOutput = `Volume ${dirSlot.value} by 1.`;
-            response = `sudo ~/Documents/tv_scripts/chng_volume ${dirSlot.value}`;
-            folderName += "tvvolume_" + dirSlot.value;
+            speechOutput = "Volume ${dirSlot.value} by 1.";
+            body[dir] = dirSlot.value.toUpperCase();
+            body[num] = 1;
         }
     } else if (cardTitle === "TVInputIntent") {
+        body[func_key] = "Input";
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = `Input Direction was ${dirSlot.value}, and Number was ${numSlot.value}.`;
-            response = `sudo ~/Documents/tv_scripts/chng_volume ${dirSlot.value} ${numSlot.value}`;
-            folderName += "tvinput_" + dirSlot.value + "_" + numSlot.value;
+            speechOutput = "Input Direction was ${dirSlot.value}, and Number was ${numSlot.value}.";
+            body[dir] = dirSlot.value.toUperCase();
+            body[num] = Number(numSlot.value);
         } else {
-            speechOutput = `Input ${dirSlot.value} by 1.`;
-            response = `sudo ~/Documents/tv_scripts/chng_volume ${dirSlot.value}`;
-            folderName += "tvinput_" + dirSlot.value;
+            speechOutput = "Input ${dirSlot.value} by 1.";
+            body[dir] = dirSlot.value.toUpperCase();
+            body[num] = Number(numSlot.value);
         }
-
     } else if (cardTitle === "TVKeyIntent") {
+        body[func_key] = "Key";
+        var type = "Key Type";
         var keySlot = intent.slots.key;
-        speechOutput = `You pressed key ${convertKey(keySlot.value)}.`;
-        response = `sudo ~/Documents/tv_scripts/key ${convertKey(keySlot.value)}`;
-        folderName += "tvkey_" + convertKey(keySlot.value);
+        speechOutput = "You pressed key ${convertKey(keySlot.value)}.";
+        body[type] = keySlot.value;
     } else {
         speechOutput = "Invalid Command.";
     }
 
-	var access_token = "M6jFx4joPvoAAAAAAAAAfYYXa_leASaFgHILerQ5ozH6iUdFgI_TR4PyCloVzByR"
-
     repromptText = "Another Command?";
 
-	var req = unirest("POST", "https://api.dropboxapi.com/2/files/create_folder");
-
-	req.headers({
-  	  "content-type": "application/json",
-          "authorization": "Bearer M6jFx4joPvoAAAAAAAAAgJ74aC0sCU-QRJBGRJO_X8oxCBDSMV3DhAzdLCfTdSv0"
-	});
-
-
-	var test = "/yugeFolder";
-	req.type("json");
-
-	var obj = {};
-	obj.path = folderName;
-	obj.autorename= false;
-
-    var json= JSON.stringify( obj);
-    console.log(json);
-	req.send(json);
-	console.log(req);
-    req.end(function (res) {
-		if (res.error) throw new Error(res.error);
-        context.succeed("Finish");
-		console.log(res.body);
-	});
     callback(sessionAttributes,
         buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession));
 }
-
-
-
-=======
-// --------------- Helpers that build all of the responses -----------------------
-
-function buildSpeechletResponse(title, output, repromptText, shouldEndSession) {
-    return {
-        outputSpeech: {
-            type: "PlainText",
-            text: output
-        },
-        card: {
-            type: "Simple",
-            title: "SessionSpeechlet - " + title,
-            content: "SessionSpeechlet - " + output
-        },
-        reprompt: {
-            outputSpeech: {
-                type: "PlainText",
-                text: repromptText
-            }
-        },
-        shouldEndSession: shouldEndSession
-    };
-
-}
-
-function buildResponse(sessionAttributes, speechletResponse) {
-    return {
-        version: "1.0",
-        sessionAttributes: sessionAttributes,
-        response: speechletResponse
-    };
-}
->>>>>>> 1708f702d35e748c61b2aa3ad87d95ca90b753a7

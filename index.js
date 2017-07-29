@@ -1,4 +1,4 @@
-var resp = require("./create_response.js");
+var resp = require("./helpers.js");
 
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.

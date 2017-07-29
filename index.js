@@ -1,4 +1,6 @@
+var PubNub = require("pubnub");
 var resp = require("./helpers.js");
+var consts = require("./constants.js");
 
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
@@ -16,6 +18,10 @@ exports.handler = function (event, context) {
                !== "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307") {
              context.fail("Invalid Application ID");
         }*/
+
+        pubnub = new PubNub({
+            publishKey : consts.PUBNUB_KEY
+        });
 
         if (event.session.new) {
             onSessionStarted(
@@ -42,6 +48,21 @@ exports.handler = function (event, context) {
         context.fail("Exception: " + e);
     }
 };
+
+/*
+ * PubNub Publish.
+ */
+function publishCommand(message) {
+    console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
+    var publishConfig = {
+        channel : consts.PUBNUB_CHANNEL,
+        message : message
+    };
+
+    pubnub.publish(publishConfig, function(status, response) {
+        console.log(status, response);
+    });
+}
 
 
 /**
@@ -74,9 +95,9 @@ function onIntent(intentRequest, session, callback, context) {
     var intentName = intentRequest.intent.name;
 
     // Dispatch to your skill's intent handlers
-    if ("TVChannelIntent" === intentName || "TVVolumeIntent" === intentName ||
-           "SocketIntent" === intentName || "TVInputIntent" === intentName ||
-           "TVKeyIntent" === intentName) {
+    if (conts.CHAN_INTENT === intentName || consts.VOL_INTENT === intentName ||
+           consts.SOCK_INTENT === intentName || consts.INPUT_INTENT === intentName ||
+           consts.KEY_INTENT === intentName) {
         resp.getResponse(intent, session, callback, context);
     } else if ("AMAZON.HelpIntent" === intentName) {
         getWelcomeResponse(callback);
@@ -103,9 +124,9 @@ function onSessionEnded(sessionEndedRequest, session) {
 function getWelcomeResponse(callback) {
     // If we wanted to initialize the session to have some attributes we could add those here.
     var sessionAttributes = {};
-    var cardTitle = "Welcome";
-    var speechOutput = "Welcome to Auto Home, how can I help?";
-    var repromptText = "Speak a command.";
+    var cardTitle = consts.WEL_TITLE;
+    var speechOutput = consts.WEL_SPEECH_OUT;
+    var repromptText = consts.WEL_REPROMPT;
     var shouldEndSession = false;
 
     callback(sessionAttributes,
@@ -113,8 +134,8 @@ function getWelcomeResponse(callback) {
 }
 
 function handleSessionEndRequest(callback) {
-    var cardTitle = "Session Ended";
-    var speechOutput = "Task Completed";
+    var cardTitle = consts.END_TITLE;
+    var speechOutput = consts.END_SPEECH_OUT;
     
 	// Setting this to true ends the session and exits the skill.
     var shouldEndSession = true;
@@ -131,27 +152,28 @@ function getResponse(intent, session, callback, context) {
     var numSlot = "";
     var dirSlot = "";
 
+    var publish = true;
     var body = {};
-    var func_key = "Function Name";
-    var dir = "Direction";
-    var num = "Number";
-    if(cardTitle === "SocketIntent") {
-        body[func_key] = "Socket";
-        var sockType = "Socket Type";
-        var sockState = "Socket State";
+    var func_key = consts.FUNC_KEY;
+    var dir = consts.DIR_KEY;
+    var num = consts.NUM_KEY;
+    if(cardTitle === consts.SOCK_INTENT) {
+        body[func_key] = consts.SOCK_FUNC;
+        var sockType = consts.SOCK.TYPE_KEY;
+        var sockState = consts.SOCK_STATE_KEY;
         var socketSlot = intent.slots.socket;
-        if(socketSlot.value == "TV") {
+        if(socketSlot.value == consts.TV_SOCKET) {
             speechOutput = "TV Power function requested.";
-            body[sockType] = "TV";
+            body[sockType] = consts.TV_SOCKET;
         } else {
             var stateSlot = intent.slots.state;
             speechOutput = "Turn ${stateSlot.value} ${socketSlot.value}";
             body[sockType] = socketSlot.value;
             body[sockState] = stateSlot.value.toUpperCase();
         }
-    } else if(cardTitle === "TVChannelIntent") {
-        body[func_key] = "Channel";
-        var chan = "Channel Number";
+    } else if(cardTitle === consts.CHAN_INTENT) {
+        body[func_key] = consts.CHAN_FUNC;
+        var chan = consts.CHAN_NUM_KEY;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(dirSlot.value) {
@@ -169,8 +191,8 @@ function getResponse(intent, session, callback, context) {
             speechOutput = "Change channel to channel ${convertChannel(chanSlot.value)}.";
             body[chan] = chanSlot.value;
         }
-    } else if (cardTitle === "TVVolumeIntent") {
-        body[func_key] = "Volume";
+    } else if (cardTitle === consts.VOL_INTENT) {
+        body[func_key] = consts.VOL_FUNC;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
@@ -182,8 +204,8 @@ function getResponse(intent, session, callback, context) {
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = 1;
         }
-    } else if (cardTitle === "TVInputIntent") {
-        body[func_key] = "Input";
+    } else if (cardTitle === consts.INPUT_INTENT) {
+        body[func_key] = consts.CHAN_FUNC;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
@@ -195,7 +217,7 @@ function getResponse(intent, session, callback, context) {
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         }
-    } else if (cardTitle === "TVKeyIntent") {
+    } else if (cardTitle === consts.KEY_INTENT) {
         body[func_key] = "Key";
         var type = "Key Type";
         var keySlot = intent.slots.key;
@@ -203,6 +225,11 @@ function getResponse(intent, session, callback, context) {
         body[type] = keySlot.value;
     } else {
         speechOutput = "Invalid Command.";
+        publish = false;
+    }
+
+    if (publish) {
+        publishCommand(body)
     }
 
     repromptText = "Another Command?";

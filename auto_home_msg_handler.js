@@ -27,14 +27,14 @@ function subscribe() {
                     var chanNum = innerMsg["Channel Number"];        
                     params = chanNum.toString().split('').join(' ');
                 } else {
-                    params = innerMsg["Direction"].toLowerCase() + " " + Number(innnerMsg["Number"]);
+                    params = innerMsg["Direction"].toLowerCase() + " " + Number(innerMsg["Number"]);
                 }
             } else if (func == "Volume") {
                 scriptName = "chng_volmue";
-                params = innerMsg["Direction"].toLowerCase() + " " + Number(innnerMsg["Number"]);
+                params = innerMsg["Direction"].toLowerCase() + " " + Number(innerMsg["Number"]);
             } else if (func == "Input") {
                 scriptName = "chng_input";
-                params = innerMsg["Direction"].toLowerCase() + " " + Number(innnerMsg["Number"]);
+                params = innerMsg["Direction"].toLowerCase() + " " + Number(innerMsg["Number"]);
             } else if (func == "Key") {
                 scriptName = "key";
                 params = innerMsg["Key Type"];

@@ -48,7 +48,7 @@ function subscribe() {
                 }
             }
 
-            shell.exec("sudo" + scriptsPath + scriptName + " " + params);
+            shell.exec("sudo " + scriptsPath + scriptName + " " + params);
         },
         presence: function(presenceEvent) {
             // handle presence

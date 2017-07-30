@@ -32,6 +32,7 @@ module.exports = {
 
     convertKey:function(keyStr) {
         keyStr = keyStr.replace(/ /g,'');
+        keyStr = keyStr.toUpperCase();
 
         if (keyStr == "INPUT") {
             return "MEDIA";
@@ -49,14 +50,14 @@ module.exports = {
     },
 
     convertSocket:function(socketStr) {
-        console.log("Converting: " + socketStr);
-        if (socketStr == "Bed Lamp") {
+        socketStr = socketStr.toLowerCase();
+        if (socketStr == "bed lamp") {
             return "2";
-        } else if (socketStr == "Fan") {
+        } else if (socketStr == "fan") {
             return "3";
-        } else if (socketStr == "A/C" || socketStr == "Air Conditioning") {
+        } else if (socketStr == "a/c" || socketStr == "air conditioning") {
             return "4";
-        } else if (socketStr == "Desk Lamp") {
+        } else if (socketStr == "desk lamp") {
             return "5";
         } else {
             return socketStr;
@@ -64,11 +65,12 @@ module.exports = {
     },
 
     convertChannel:function(chanStr) {
+        chanStr = chanStr.toUpperCase();
         if ("TBN" == chanStr || chanStr == "2") {
             return 2;
         } else if ("NBC" == chanStr || chanStr == "203") {
             return 203;
-        } else if ("The CW" == chanStr || chanStr == "204") {
+        } else if ("THE CW" == chanStr || chanStr == "204") {
             return 204;
         } else if ("ABC" == chanStr || chanStr == "206") {
             return 206;
@@ -80,19 +82,19 @@ module.exports = {
             return 201;
         } else if ("USA" == chanStr || chanStr == "12") {
             return 12;
-        } else if ("Nickelodeon" == chanStr || chanStr == "13") {
+        } else if ("NICKELODEON" == chanStr || chanStr == "13") {
             return 13;
         } else if ("HSN" == chanStr || chanStr == "16") {
             return 16;
-        } else if ("Cartoon Network" == chanStr || chanStr == "23") {
+        } else if ("CARTOON NETWORK" == chanStr || chanStr == "23") {
             return 23;
-        } else if ("Lifetime" == chanStr || chanStr == "25") {
+        } else if ("LIFETIME" == chanStr || chanStr == "25") {
             return 25;
         } else if ("MTV" == chanStr || chanStr == "29") {
             return 29;
-        } else if ("FOX Spots Ohio" == chanStr || chanStr == "30") {
+        } else if ("FOX SPORTS OHIO" == chanStr || chanStr == "30") {
             return 30;
-        } else if ("Golf Channel" == chanStr || chanStr == "31") {
+        } else if ("GOLF CHANNEL" == chanStr || chanStr == "31") {
             return 31;
         } else if ("FXX" == chanStr || chanStr == "32") {
             return 32;
@@ -104,27 +106,27 @@ module.exports = {
             return 35;
         } else if ("AMC" == chanStr || chanStr == "36") {
             return 36;
-        } else if ("Bravo" == chanStr || chanStr == "37") {
+        } else if ("BRAVO" == chanStr || chanStr == "37") {
             return 37;
-        } else if ("Food Network" == chanStr || chanStr == "38") {
+        } else if ("FOOD NETWORK" == chanStr || chanStr == "38") {
             return 38;
         } else if ("HGTV" == chanStr || chanStr == "39") {
             return 39;
-        } else if ("Turner Classic Movies" == chanStr || chanStr == "40") {
+        } else if ("TURNER CLASSIC MOVIES" == chanStr || chanStr == "40") {
             return 40;
-        } else if ("Freeform" == chanStr || chanStr == "41") {
+        } else if ("FREEFORM" == chanStr || chanStr == "41") {
             return 41;
         } else if ("TLC" == chanStr || chanStr == "42") {
             return 42;
-        } else if ("National Geographic" == chanStr || chanStr == "43") {
+        } else if ("NATIONAL GEOGRAPHIC" == chanStr || chanStr == "43") {
             return 43;
-        } else if ("SyFy" == chanStr || chanStr == "44") {
+        } else if ("SYFY" == chanStr || chanStr == "44") {
             return 44;
         } else if ("A&E" == chanStr || chanStr == "45") {
             return 45;
-        } else if ("History Channel" == chanStr || chanStr == "46") {
+        } else if ("HISTORY CHANNEL" == chanStr || chanStr == "46") {
             return 46;
-        } else if ("Discovery Channel" == chanStr || chanStr == "47") {
+        } else if ("DISCOVERY CHANNEL" == chanStr || chanStr == "47") {
             return 47;
         } else if ("TBS" == chanStr || chanStr == "49") {
             return 49;
@@ -136,31 +138,31 @@ module.exports = {
             return 52;
         } else if ("MSNBC" == chanStr || chanStr == "53") {
             return 53;
-        } else if ("Animal Planet" == chanStr || chanStr == "54") {
+        } else if ("ANIMAL PLANET" == chanStr || chanStr == "54") {
             return 54;
-        } else if ("FOX News Channel" == chanStr || chanStr == "55") {
+        } else if ("FOX NEWS CHANNEL" == chanStr || chanStr == "55") {
             return 55;
-        } else if ("Tennis Channel" == chanStr || chanStr == "56") {
+        } else if ("TENNIS CHANNEL" == chanStr || chanStr == "56") {
             return 56;
-        } else if ("SportsTime Ohio" == chanStr || chanStr == "57") {
+        } else if ("SPORTSTIME OHIO" == chanStr || chanStr == "57") {
             return 57;
-        } else if ("Spike" == chanStr || chanStr == "58") {
+        } else if ("SPIKE" == chanStr || chanStr == "58") {
             return 58;
         } else if ("BET" == chanStr || chanStr == "59") {
             return 59;
         } else if ("CMT" == chanStr || chanStr == "60") {
             return 60;
-        } else if ("Travel Channel" == chanStr || chanStr == "61") {
+        } else if ("TRAVEL CHANNEL" == chanStr || chanStr == "61") {
             return 61;
-        } else if ("The Weather Channel" == chanStr || chanStr == "62") {
+        } else if ("THE WEATHER CHANNEL" == chanStr || chanStr == "62") {
             return 62;
         } else if ("FX" == chanStr || chanStr == "64") {
             return 64;
-        } else if ("Lifetime Movie Network" == chanStr || chanStr == "65") {
+        } else if ("LIFETIME MOVIE NETWORK" == chanStr || chanStr == "65") {
             return 65;
-        } else if ("TV Land" == chanStr || chanStr == "66") {
+        } else if ("TV LAND" == chanStr || chanStr == "66") {
             return 66;
-        } else if ("TruTV" == chanStr || chanStr == "67") {
+        } else if ("TRUTV" == chanStr || chanStr == "67") {
             return 67;
         } else if ("OWN" == chanStr || chanStr == "68") {
             return 68;
@@ -168,29 +170,29 @@ module.exports = {
             return 69;
         } else if ("FS1" == chanStr || chanStr == "70") {
             return 70;
-        } else if ("Hallmark Movies and Mysteries" == chanStr || chanStr == "71") {
+        } else if ("HALLMARK MOVIES AND MYSTERIES" == chanStr || chanStr == "71") {
             return 71;
         } else if ("WE TV" == chanStr || chanStr == "72") {
             return 72;
-        } else  if ("WGN America" == chanStr || chanStr == "73") {
+        } else  if ("WGN AMERICA" == chanStr || chanStr == "73") {
             return 73;
-        } else if ("Sundance" == chanStr || chanStr == "74") {
+        } else if ("SUNDANCE" == chanStr || chanStr == "74") {
             return 74;
         } else if ("IFC" == chanStr || chanStr == "75") {
             return 75;
         } else if ("FXM" == chanStr || chanStr == "77") {
             return 77;
-        } else if ("FOX Sports Ohio" == chanStr || chanStr == "78") {
+        } else if ("FOX SPORTS OHIO" == chanStr || chanStr == "78") {
             return 78;
-        } else if ("Hallmark Channel" == chanStr || chanStr == "81") {
+        } else if ("HALLMARK CHANNEL" == chanStr || chanStr == "81") {
             return 81;
-        } else if ("FOX Business" == chanStr || chanStr == "82") {
+        } else if ("FOX BUSINESS" == chanStr || chanStr == "82") {
             return 82;
-        } else if ("Investigation Discovery" == chanStr || chanStr == "83") {
+        } else if ("INVESTIGATION DISCOVERY" == chanStr || chanStr == "83") {
             return 83;
-        } else if ("Big Ten Network" == chanStr || chanStr == "87") {
+        } else if ("BIG TEN NETWORK" == chanStr || chanStr == "87") {
             return 87;
-        } else if ("NBC Sports Network" == chanStr || chanStr == "88") {
+        } else if ("NBC SPORTS NETWORK" == chanStr || chanStr == "88") {
             return 88;
         }
     }

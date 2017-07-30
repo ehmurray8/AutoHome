@@ -38,8 +38,9 @@ var handlers = {
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
-        this.emit(':ask', speechOutput, repromptSpeech);
-        this.emit('SessionEndedRequest');
+        //this.emit(':ask', speechOutput, repromptSpeech);
+        //this.emit('SessionEndedRequest');
+        this.emit(':tell', this.t("STOP_MESSAGE"));
     },
     'TVChannelIntent': function() {
         rets = handleUserIntent(consts.CHAN_INTENT, this.event.request.intent);        
@@ -50,8 +51,9 @@ var handlers = {
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
-        this.emit(':ask', speechOutput, repromptSpeech);
-        this.emit('SessionEndedRequest');
+        //this.emit(':ask', speechOutput, repromptSpeech);
+        //this.emit('SessionEndedRequest');
+        this.emit(':tell', this.t("STOP_MESSAGE"));
     },
     'TVVolumeIntent': function() {
         rets = handleUserIntent(consts.VOL_INTENT, this.event.request.intent);        
@@ -62,8 +64,9 @@ var handlers = {
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
-        this.emit(':ask', speechOutput, repromptSpeech);
-        this.emit('SessionEndedRequest');
+        //this.emit(':ask', speechOutput, repromptSpeech);
+        //this.emit('SessionEndedRequest');
+        this.emit(':tell', this.t("STOP_MESSAGE"));
     },
     'TVKeyIntent': function() {
         rets = handleUserIntent(consts.KEY_INTENT, this.event.request.intent);        
@@ -74,8 +77,9 @@ var handlers = {
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
-        this.emit(':ask', speechOutput, repromptSpeech);
-        this.emit('SessionEndedRequest');
+        //this.emit(':ask', speechOutput, repromptSpeech);
+        //this.emit('SessionEndedRequest');
+        this.emit(':tell', this.t("STOP_MESSAGE"));
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t("HELP_MESSAGE");
@@ -153,11 +157,11 @@ function handleUserIntent(cardTitle, intent) {
         var socketSlot = intent.slots.socket; 
         if(socketSlot.value == consts.TV_SOCKET) 
         { 
-            speechOutput = "TV Power function requested."; 
+            speechOutput = "TV Power"; 
             body[sockType] = consts.TV_SOCKET;
         } else {
             var stateSlot = intent.slots.state;
-            speechOutput = "Turn " + stateSlot.value + " " + helpers.convertSocket(socketSlot.value) + ".";
+            speechOutput = "Turn " + stateSlot.value + " " + socketSlot.value;
             body[sockType] = helpers.convertSocket(socketSlot.value);
             body[sockState] = stateSlot.value.toUpperCase();
         }
@@ -169,17 +173,17 @@ function handleUserIntent(cardTitle, intent) {
         dirSlot = intent.slots.direction;
         if(dirSlot.value) {
             if(numSlot.value) {
-                speechOutput = "Channel Direction was " + dirSlot.value + ", and Number was " + numSlot.value + ".";
+                speechOutput = "Channel Direction was " + dirSlot.value + ", and Number was " + numSlot.value;
                 body[dir] = dirSlot.value.toUpperCase();
                 body[num] = Number(numSlot.value);
             } else {
-                speechOutput = "Channel " + dirSlot.value + "by 1.";
+                speechOutput = "Channel " + dirSlot.value + "by 1";
                 body[dir] = dirSlot.value.toUpperCase();
                 body[num] = 1;
             }
         } else {
             var chanSlot = intent.slots.channel;
-            speechOutput = "Change channel to channel " + helpers.convertChannel(chanSlot.value) + ".";
+            speechOutput = "Change channel to channel " + chanSlot.value;
             body[chan] = helpers.convertChannel(chanSlot.value);
         }
         publishCommand(body);
@@ -188,7 +192,7 @@ function handleUserIntent(cardTitle, intent) {
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = "Volume Direction was " + dirSlot.value + ", and Number was " + numSlot.value + ".";
+            speechOutput = "Volume Direction was " + dirSlot.value + ", and Number was " + numSlot.value;
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         } else {
@@ -202,7 +206,7 @@ function handleUserIntent(cardTitle, intent) {
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = "Input Direction was " + dirSlot.value + ", and Number was " + numSlot.value + ".";
+            speechOutput = "Input Direction was " + dirSlot.value + ", and Number was " + numSlot.value;
             body[dir] = dirSlot.value.toUperCase();
             body[num] = Number(numSlot.value);
         } else {
@@ -215,11 +219,11 @@ function handleUserIntent(cardTitle, intent) {
         body[func_key] = consts.KEY_FUNC;
         var type = "Key Type";
         var keySlot = intent.slots.key;
-        speechOutput = "You pressed key " + helpers.convertKey(keySlot.value) + ".";
+        speechOutput = "You pressed key " + keySlot.value;
         body[type] = helpers.convertKey(keySlot.value);
         publishCommand(body);
     } else {
-        speechOutput = "Invalid Command.";
+        speechOutput = "Invalid Command";
         publish = false;
     }
 

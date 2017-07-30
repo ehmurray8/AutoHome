@@ -49,6 +49,7 @@ module.exports = {
     },
 
     convertSocket:function(socketStr) {
+        console.log("Converting: " + socketStr);
         if (socketStr == "Bed Lamp") {
             return "2";
         } else if (socketStr == "Fan") {

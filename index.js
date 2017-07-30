@@ -33,23 +33,25 @@ var handlers = {
         rets = handleUserIntent(consts.SOCK_INTENT, this.event.request.intent);        
         speechOutput = rets[0];
         repromptSpeech = "Another Command?";
-        speechOutput += repromptSpeech; 
+        //speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
         this.emit(':ask', speechOutput, repromptSpeech);
+        this.emit('SessionEndedRequest');
     },
     'TVChannelIntent': function() {
         rets = handleUserIntent(consts.CHAN_INTENT, this.event.request.intent);        
         speechOutput = rets[0];
         repromptSpeech = "Another Command?";
-        speechOutput += repromptSpeech; 
+        //speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
         this.emit(':ask', speechOutput, repromptSpeech);
+        this.emit('SessionEndedRequest');
     },
     'TVVolumeIntent': function() {
         rets = handleUserIntent(consts.VOL_INTENT, this.event.request.intent);        
@@ -61,17 +63,19 @@ var handlers = {
 
         //publishCommand(rets[1]);
         this.emit(':ask', speechOutput, repromptSpeech);
+        this.emit('SessionEndedRequest');
     },
     'TVKeyIntent': function() {
         rets = handleUserIntent(consts.KEY_INTENT, this.event.request.intent);        
         speechOutput = rets[0];
         repromptSpeech = "Another Command?";
         speechOutput += repromptSpeech; 
-        this.attributes.speechOutput = speechOutput; 
+        //this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
 
         //publishCommand(rets[1]);
         this.emit(':ask', speechOutput, repromptSpeech);
+        this.emit('SessionEndedRequest');
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t("HELP_MESSAGE");

@@ -43,12 +43,12 @@ function subscribe() {
                 if (innerMsg.hasOwnProperty("Socket State")) {
                     params = Number(innerMsg["Socket Type"]) + " " + innerMsg["Socket State"].toLowerCase(); 
                 } else {
-                    scriptName = "Key";
+                    scriptName = "key";
                     params = "POWER";
                 }
             }
 
-            shell.exec(scriptsPath + scriptName + " " + params);
+            shell.exec("sudo" + scriptsPath + scriptName + " " + params);
         },
         presence: function(presenceEvent) {
             // handle presence

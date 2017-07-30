@@ -1,4 +1,5 @@
 var Alexa = require('alexa-sdk');
+var sleep = require("sleep")
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
 var PubNub = require("pubnub");
 var helpers = require("./helpers.js");
@@ -36,11 +37,12 @@ var handlers = {
         //speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
+        sleep.msleep(150);
 
         //publishCommand(rets[1]);
         //this.emit(':ask', speechOutput, repromptSpeech);
         //this.emit('SessionEndedRequest');
-        this.emit(':tell', this.t("STOP_MESSAGE"));
+        this.emit(':tell', this.t(""));
     },
     'TVChannelIntent': function() {
         rets = handleUserIntent(consts.CHAN_INTENT, this.event.request.intent);        
@@ -49,11 +51,12 @@ var handlers = {
         //speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
+        sleep.msleep(150);
 
         //publishCommand(rets[1]);
         //this.emit(':ask', speechOutput, repromptSpeech);
         //this.emit('SessionEndedRequest');
-        this.emit(':tell', this.t("STOP_MESSAGE"));
+        this.emit(':tell', this.t(""));
     },
     'TVVolumeIntent': function() {
         rets = handleUserIntent(consts.VOL_INTENT, this.event.request.intent);        
@@ -62,11 +65,12 @@ var handlers = {
         speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
+        sleep.msleep(150);
 
         //publishCommand(rets[1]);
         //this.emit(':ask', speechOutput, repromptSpeech);
         //this.emit('SessionEndedRequest');
-        this.emit(':tell', this.t("STOP_MESSAGE"));
+        this.emit(':tell', this.t(""));
     },
     'TVKeyIntent': function() {
         rets = handleUserIntent(consts.KEY_INTENT, this.event.request.intent);        
@@ -75,11 +79,12 @@ var handlers = {
         speechOutput += repromptSpeech; 
         //this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
+        sleep.msleep(150);
 
         //publishCommand(rets[1]);
         //this.emit(':ask', speechOutput, repromptSpeech);
         //this.emit('SessionEndedRequest');
-        this.emit(':tell', this.t("STOP_MESSAGE"));
+        this.emit(':tell', this.t(""));
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t("HELP_MESSAGE");
@@ -210,7 +215,7 @@ function handleUserIntent(cardTitle, intent) {
             body[dir] = dirSlot.value.toUperCase();
             body[num] = Number(numSlot.value);
         } else {
-            speechOutput = "Input ${dirSlot.value} by 1.";
+            speechOutput = "Input " + dirSlot.value + by 1.";
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         }

@@ -4,7 +4,7 @@ var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
 var PubNub = require("pubnub");
 var helpers = require("./helpers.js");
 var consts = require("./constants.js");
-var keys = require("./keys.js")
+var keys = require("./pubcodes.js")
 
 pubnub = new PubNub({
         publishKey : keys.PUBNUB_KEY_P,

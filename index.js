@@ -2,14 +2,20 @@ var Alexa = require('alexa-sdk');
 var sleep = require("sleep");
 var Client = require('node-rest-client').Client;
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
-//var PubNub = require("pubnub");
+var PubNub = require("pubnub");
 var helpers = require("./helpers.js");
 var consts = require("./constants.js");
+var keys = require("./keys.js");
 
-/*pubnub = new PubNub({
-        publishKey : consts.PUBNUB_KEY_P,
-        subscribeKey : consts.PUBNUB_KEY_S
-});*/
+var pubnub = new PubNub({
+        publishKey : keys.PUBNUB_KEY_P,
+        subscribeKey : keys.PUBNUB_KEY_S
+});
+
+var publishConfig = {
+        channel: keys.PUBNUB_CHANNEL,
+        message: message
+    };
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -24,13 +30,10 @@ exports.handler = function(event, context, callback) {
 function handleFunc(method, intent, mainObj) {
     speechOutput = handleUserIntent(method, intent);        
     repromptSpeech = "Another Command?";
-    //speechOutput += repromptSpeech; 
     mainObj.attributes.speechOutput = speechOutput; 
     mainObj.attributes.repromptSpeech = repromptSpeech;
 
     mainObj.emit(':ask', speechOutput, repromptSpeech);
-    //sleep.msleep(5000);
-    //this.emit(':tell', this.t(""));
 }
 
 var handlers = {
@@ -103,28 +106,10 @@ var languageStrings = {
  */
 function publishCommand(message) {
     console.log("Begin publish");
-    /*var publishConfig = {
-        channel: consts.PUBNUB_CHANNEL,
-        message: message
-    };
-
+    
     pubnub.publish(publishConfig, function(status, response) {
         console.log(status, response);
         return response;
-    });*/
-
-    var client = new Client(); 
-    var args = {
-        data: message,
-        headers: { "Content-Type": "application/json" }
-    };
-
-    var url = "https://auto-home.azurewebsites.net/api/AutoHomeMsgJS?code=QO1sEkPgY1vnFtIAkS2F3Qg7blxKai12IUcobZEae82Ys3fBmv7aog==";
-    client.post(url, args, function (data, response) {
-        // parsed response body as js object 
-        console.log(data);
-        // raw response 
-        console.log(response);
     });
 }
 

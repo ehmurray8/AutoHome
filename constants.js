@@ -50,14 +50,6 @@ const KEY_FUNC = "Key";
  */ 
 const TV_SOCKET = "TV";
 
-/*
- * PubNub 
- */
-const PUBNUB_KEY_P = "pub-c-7e9eb7ff-6ec8-4486-b03f-e0f68291b14c";
-const PUBNUB_KEY_S = "sub-c-906b4314-7409-11e7-91f5-0619f8945a4f";
-const PUBNUB_CHANNEL = "auto_home_channel";
-
-
 module.exports = {
     CHAN_INTENT: CHAN_INTENT,
     VOL_INTENT: VOL_INTENT,
@@ -82,7 +74,4 @@ module.exports = {
     INPUT_FUNC: INPUT_FUNC,
     KEY_FUNC: KEY_FUNC,
     TV_SOCKET: TV_SOCKET,
-    PUBNUB_KEY_P: PUBNUB_KEY_P,
-    PUBNUB_KEY_S: PUBNUB_KEY_S,
-    PUBNUB_CHANNEL: PUBNUB_CHANNEL
 };

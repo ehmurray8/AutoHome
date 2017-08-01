@@ -1,6 +1,4 @@
 var Alexa = require('alexa-sdk');
-var sleep = require("sleep");
-var Client = require('node-rest-client').Client;
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
 var PubNub = require("pubnub");
 var helpers = require("./helpers.js");

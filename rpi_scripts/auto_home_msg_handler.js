@@ -1,24 +1,23 @@
-var PubNub = require('pubnub');
-var shell = require('shelljs');
+/*
+ * Runs on RPI and receives messages sent by Alexa or Android.
+ */
 
-var scriptsPath = "~/AutoHome/rpi_scripts/";
+var shell = require('shelljs');
+var Ably = require('ably');
+var ably_info = require('./ably_info.js');
+var scriptspath = "~/autohome/rpi_scripts/";
 var scriptName = "";
 var params = "";
 
+var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
+var channel = realtime.channels.get(ably_info.ABLY_CHAN);
+
 function subscribe() {
    
-    pubnub = new PubNub({
-        subscribeKey : 'sub-c-906b4314-7409-11e7-91f5-0619f8945a4f'
-    });
-       
-    pubnub.addListener({
-        status: function(statusEvent) {
-            //if (statusEvent.category === "PNConnectedCategory") {
-            //    publishSampleMessage();
-            //
-        },
-        message: function(message) {
-            console.log("New Message!!", message);
+    channel.subscribe(
+        function(message) {
+            console.log("New Message!!", message.data);
+            message = message.data;
             var innerMsg = message.message;
             var func = innerMsg["Function Name"];
             if (func == "Channel") {
@@ -49,16 +48,8 @@ function subscribe() {
             }
 
             shell.exec("sudo " + scriptsPath + scriptName + " " + params);
-        },
-        presence: function(presenceEvent) {
-            // handle presence
         }
-    }); 
-
-    console.log("Subscribing..");
-    pubnub.subscribe({
-        channels: ['auto_home'] 
-    });
+    ); 
 }
 
 if (require.main === module) {

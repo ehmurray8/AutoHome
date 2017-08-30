@@ -1,15 +1,13 @@
 var Alexa = require('alexa-sdk');
 var sleep = require("sleep")
+var Ably = require('ably');
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
-var PubNub = require("pubnub");
 var helpers = require("./helpers.js");
 var consts = require("./constants.js");
-var keys = require("./pubcodes.js")
+var ably_info = require("./ably_info.js");
 
-pubnub = new PubNub({
-        publishKey : keys.PUBNUB_KEY_P,
-        subscribeKey : keys.PUBNUB_KEY_S
-});
+var ably = new Ably.Realtime({key:ably_info.ABLY_KEY});
+var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN);
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -35,28 +33,20 @@ var handlers = {
         rets = handleUserIntent(consts.SOCK_INTENT, this.event.request.intent);        
         speechOutput = rets[0];
         repromptSpeech = "Another Command?";
-        //speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        sleep.msleep(150);
+        //sleep.msleep(150);
 
-        //publishCommand(rets[1]);
-        //this.emit(':ask', speechOutput, repromptSpeech);
-        //this.emit('SessionEndedRequest');
         this.emit(':tell', this.t(""));
     },
     'TVChannelIntent': function() {
         rets = handleUserIntent(consts.CHAN_INTENT, this.event.request.intent);        
         speechOutput = rets[0];
         repromptSpeech = "Another Command?";
-        //speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        sleep.msleep(150);
+        //sleep.msleep(150);
 
-        //publishCommand(rets[1]);
-        //this.emit(':ask', speechOutput, repromptSpeech);
-        //this.emit('SessionEndedRequest');
         this.emit(':tell', this.t(""));
     },
     'TVVolumeIntent': function() {
@@ -66,11 +56,8 @@ var handlers = {
         speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        sleep.msleep(150);
+        //sleep.msleep(150);
 
-        //publishCommand(rets[1]);
-        //this.emit(':ask', speechOutput, repromptSpeech);
-        //this.emit('SessionEndedRequest');
         this.emit(':tell', this.t(""));
     },
     'TVKeyIntent': function() {
@@ -78,13 +65,9 @@ var handlers = {
         speechOutput = rets[0];
         repromptSpeech = "Another Command?";
         speechOutput += repromptSpeech; 
-        //this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        sleep.msleep(150);
+        //sleep.msleep(150);
 
-        //publishCommand(rets[1]);
-        //this.emit(':ask', speechOutput, repromptSpeech);
-        //this.emit('SessionEndedRequest');
         this.emit(':tell', this.t(""));
     },
     'AMAZON.HelpIntent': function () {
@@ -127,21 +110,6 @@ var languageStrings = {
     }
 };
 
-/*
- * PubNub Publish.
- */
-function publishCommand(message) {
-    
-    console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
-    var publishConfig = {
-        channel : consts.PUBNUB_CHANNEL,
-        message : message
-    };
-
-    pubnub.publish(publishConfig, function(status, response) {
-        console.log(status, response);
-    });
-}
 
 function handleUserIntent(cardTitle, intent) {
     var repromptText = "";
@@ -171,7 +139,6 @@ function handleUserIntent(cardTitle, intent) {
             body[sockType] = helpers.convertSocket(socketSlot.value);
             body[sockState] = stateSlot.value.toUpperCase();
         }
-        publishCommand(body);
     } else if(cardTitle === consts.CHAN_INTENT) {
         body[func_key] = consts.CHAN_FUNC;
         var chan = consts.CHAN_NUM_KEY;
@@ -192,7 +159,6 @@ function handleUserIntent(cardTitle, intent) {
             speechOutput = "Change channel to channel " + chanSlot.value;
             body[chan] = helpers.convertChannel(chanSlot.value);
         }
-        publishCommand(body);
     } else if (cardTitle === consts.VOL_INTENT) {
         body[func_key] = consts.VOL_FUNC;
         numSlot = intent.slots.number;
@@ -206,7 +172,6 @@ function handleUserIntent(cardTitle, intent) {
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = 1;
         }
-        publishCommand(body);
     } else if (cardTitle === consts.INPUT_INTENT) {
         body[func_key] = consts.CHAN_FUNC;
         numSlot = intent.slots.number;
@@ -220,22 +185,19 @@ function handleUserIntent(cardTitle, intent) {
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         }
-        publishCommand(body);
     } else if (cardTitle === consts.KEY_INTENT) {
         body[func_key] = consts.KEY_FUNC;
         var type = "Key Type";
         var keySlot = intent.slots.key;
         speechOutput = "You pressed key " + keySlot.value;
         body[type] = helpers.convertKey(keySlot.value);
-        publishCommand(body);
     } else {
         speechOutput = "Invalid Command";
         publish = false;
     }
 
     if (publish) {
-        //publishCommand(body);
-        console.log("Published");
+        ably_channel.publish("update", body);
     }   
     return [speechOutput, body];
 }

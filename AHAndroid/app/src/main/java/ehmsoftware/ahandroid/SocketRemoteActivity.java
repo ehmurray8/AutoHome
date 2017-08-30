@@ -65,7 +65,6 @@ public class SocketRemoteActivity extends AppCompatActivity {
         private String toastString;
         private Button button;
         private Context context;
-        private AblyRealtime realtime;
         private Channel channel;
 
         private static Toast currToast = null;
@@ -75,7 +74,6 @@ public class SocketRemoteActivity extends AppCompatActivity {
             this.toastString = toastString;
             this.button = button;
             this.context = context;
-            this.realtime = realtime;
             this.channel = realtime.channels.get(SocketRemoteActivity.CHAN_STR);
 
 

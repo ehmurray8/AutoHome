@@ -47,7 +47,7 @@ var handlers = {
     'LightsIntent': function() {
         handleUserIntent(consts.LIGHTS_INTENT, this.event.request.intent, this);
     },
-    'SleepIntent': function() [
+    'SleepIntent': function() {
         handleUserIntent(consts.SLEEP_INTENT, this.event.request.intent, this);
     },
     'AMAZON.HelpIntent': function () {

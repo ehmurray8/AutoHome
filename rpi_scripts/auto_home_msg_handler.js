@@ -55,12 +55,14 @@ function handle_msg(message) {
             scriptName = "key";
             params = "POWER";
         }
-    } else if(func == "Lights") {
+    } else if (func == "Lights") {
         multFuncs = true;
         scriptName = "socket";
         params = 2 + " " + message["State"].toLowerCase();
         params2 = 5 + " " + message["State"].toLowerCase();
-    } else {
+    } else if (func == "Sleep") {
+        scriptName = "sleep";
+    }  else {
         console.log(func);
         valid = false;        
     }

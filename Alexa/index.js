@@ -44,8 +44,11 @@ var handlers = {
     'TVInputIntent': function() {
         handleUserIntent(consts.INPUT_INTENT, this.event.request.intent, this);
     },
-    'LightsIntent': function() [
-        handleUserIntent(conts.LIGHTS_INTENT, this.event.request.intent, this);
+    'LightsIntent': function() {
+        handleUserIntent(consts.LIGHTS_INTENT, this.event.request.intent, this);
+    },
+    'SleepIntent': function() [
+        handleUserIntent(consts.SLEEP_INTENT, this.event.request.intent, this);
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t("HELP_MESSAGE");
@@ -177,6 +180,8 @@ function handleUserIntent(cardTitle, intent, handler) {
         stateSlot = intent.slots.state;
         speechOutput = "Lights " + stateSlot.value;
         body[state] = stateSlot.value;
+    } else if (cardTitle === consts.SLEEP_INTENT) {
+        body[func_key] = consts.SLEEP_FUNC;
     } else {
         speechOutput = "Invalid Command";
         publish = false;

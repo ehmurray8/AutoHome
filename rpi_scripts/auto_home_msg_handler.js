@@ -58,8 +58,8 @@ function handle_msg(message) {
     } else if(func == "Lights") {
         multFuncs = true;
         scriptName = "socket";
-        params = 2 + " " + innerMsg["State"].toLowerCase();
-        params2 = 5 + " " + innerMsg["State"].toLowerCase();
+        params = 2 + " " + message["State"].toLowerCase();
+        params2 = 5 + " " + message["State"].toLowerCase();
     } else {
         console.log(func);
         valid = false;        

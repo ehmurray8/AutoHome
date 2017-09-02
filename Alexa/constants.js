@@ -7,6 +7,7 @@ const VOL_INTENT = "TVVolumeIntent";
 const SOCK_INTENT = "SocketIntent";
 const INPUT_INTENT = "TVInputIntent";
 const KEY_INTENT = "TVKeyIntent";
+const LIGHTS_INTENT = "LightsIntent";
 
 /*
  * General Output
@@ -44,6 +45,7 @@ const CHAN_FUNC = "Channel";
 const VOL_FUNC = "Volume";
 const INPUT_FUNC = "Input";
 const KEY_FUNC = "Key";
+const LIGHTS_FUNC = "Lights";
 
 /*
  * Other JSON
@@ -57,6 +59,7 @@ module.exports = {
     SOCK_INTENT: SOCK_INTENT,
     INPUT_INTENT: INPUT_INTENT,
     KEY_INTENT: KEY_INTENT,
+    LIGHTS_INTENT: LIGHTS_INTENT,
     REPROMPT: REPROMPT,            
     WEL_TITLE: WEL_TITLE,
     WEL_SPEECH_OUT: WEL_SPEECH_OUT,    
@@ -74,5 +77,6 @@ module.exports = {
     VOL_FUNC: VOL_FUNC,
     INPUT_FUNC: INPUT_FUNC,
     KEY_FUNC: KEY_FUNC,
+    LIGHTS_FUNC: LIGHTS_FUNC,
     TV_SOCKET: TV_SOCKET,
 };

@@ -55,7 +55,7 @@ module.exports = {
             return "2";
         } else if (socketStr == "fan") {
             return "3";
-        } else if (socketStr == "ac" || socketStr == "air conditioning") {
+        } else if (socketStr == "ac" || socketStr == "air conditioning" || socketStr == "a/c") {
             return "4";
         } else if (socketStr == "lamp") {
             return "5";

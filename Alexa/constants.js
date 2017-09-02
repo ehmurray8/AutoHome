@@ -51,8 +51,6 @@ const KEY_FUNC = "Key";
 const TV_SOCKET = "TV";
 
 
-
-
 module.exports = {
     CHAN_INTENT: CHAN_INTENT,
     VOL_INTENT: VOL_INTENT,
@@ -77,7 +75,4 @@ module.exports = {
     INPUT_FUNC: INPUT_FUNC,
     KEY_FUNC: KEY_FUNC,
     TV_SOCKET: TV_SOCKET,
-    PUBNUB_KEY_P: PUBNUB_KEY_P,
-    PUBNUB_KEY_S: PUBNUB_KEY_S,
-    PUBNUB_CHANNEL: PUBNUB_CHANNEL
 };

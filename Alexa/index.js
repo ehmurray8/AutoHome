@@ -1,12 +1,12 @@
 var Alexa = require('alexa-sdk');
-var sleep = require("sleep")
+//var sleep = require("sleep");
 var Ably = require('ably');
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
 var helpers = require("./helpers.js");
 var consts = require("./constants.js");
 var ably_info = require("./ably_info.js");
 
-var ably = new Ably.Realtime({key:ably_info.ABLY_KEY});
+var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
 var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN);
 
 exports.handler = function(event, context, callback) {

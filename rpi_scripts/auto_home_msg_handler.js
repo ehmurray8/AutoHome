@@ -8,11 +8,8 @@ var realtime = new Ably.Realtime({key: ably_info.ABLY_KEY});
 var channel = realtime.channels.get(ably_info.ABLY_CHAN);
 
 channel.subscribe(function(msg) {
-    console.log("Received: " + JSON.stringify(msg.data));
     handle_msg(msg);
 });
-
-channel.publish("Test", {"key":"value"});
 
 
 function handle_msg(message) {

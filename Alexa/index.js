@@ -1,10 +1,15 @@
 var Alexa = require('alexa-sdk');
-var Ably = require('ably'); var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307"; var helpers = require("./helpers.js");
+var unirest = require("unirest");
+//var Ably = require('ably'); 
+var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307"; 
+var helpers = require("./helpers.js");
 var consts = require("./constants.js");
 var ably_info = require("./ably_info.js");
 
-var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
-var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN);
+//var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
+//var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN);
+
+
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -27,41 +32,42 @@ var handlers = {
         this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
     'SocketIntent': function() {
-        rets = handleUserIntent(consts.SOCK_INTENT, this.event.request.intent);        
-        speechOutput = rets[0];
-        repromptSpeech = "Another Command?";
-        this.attributes.speechOutput = speechOutput; 
-        this.attributes.repromptSpeech = repromptSpeech;
+        handleUserIntent(consts.SOCK_INTENT, this.event.request.intent, this);
+        //speechOutput = rets[0];
+        //repromptSpeech = "Another Command?";
+        //this.attributes.speechOutput = speechOutput; 
+        //this.attributes.repromptSpeech = repromptSpeech;
 
-        this.emit(':tell', this.t(""));
+        //this.emit(':tell', this.t(""));
+        //this.emit(':tell', speechOutput);
     },
     'TVChannelIntent': function() {
-        rets = handleUserIntent(consts.CHAN_INTENT, this.event.request.intent);        
-        speechOutput = rets[0];
-        repromptSpeech = "Another Command?";
-        this.attributes.speechOutput = speechOutput; 
-        this.attributes.repromptSpeech = repromptSpeech;
+        handleUserIntent(consts.CHAN_INTENT, this.event.request.intent, this);
+        //speechOutput = rets[0];
+        //repromptSpeech = "Another Command?";
+        //this.attributes.speechOutput = speechOutput; 
+        //this.attributes.repromptSpeech = repromptSpeech;
 
-        this.emit(':tell', this.t(""));
+        //this.emit(':tell', this.t(""));
     },
     'TVVolumeIntent': function() {
-        rets = handleUserIntent(consts.VOL_INTENT, this.event.request.intent);        
-        speechOutput = rets[0];
-        repromptSpeech = "Another Command?";
-        speechOutput += repromptSpeech; 
-        this.attributes.speechOutput = speechOutput; 
-        this.attributes.repromptSpeech = repromptSpeech;
+        handleUserIntent(consts.VOL_INTENT, this.event.request.intent, this);
+        //speechOutput = rets[0];
+        //repromptSpeech = "Another Command?";
+        //speechOutput += repromptSpeech; 
+        //this.attributes.speechOutput = speechOutput; 
+        //this.attributes.repromptSpeech = repromptSpeech;
 
-        this.emit(':tell', this.t(""));
+        //this.emit(':tell', this.t(""));
     },
     'TVKeyIntent': function() {
-        rets = handleUserIntent(consts.KEY_INTENT, this.event.request.intent);        
-        speechOutput = rets[0];
-        repromptSpeech = "Another Command?";
-        speechOutput += repromptSpeech; 
-        this.attributes.repromptSpeech = repromptSpeech;
+        handleUserIntent(consts.KEY_INTENT, this.event.request.intent, this);
+        //speechOutput = rets[0];
+        //repromptSpeech = "Another Command?";
+        //speechOutput += repromptSpeech; 
+        //this.attributes.repromptSpeech = repromptSpeech;
 
-        this.emit(':tell', this.t(""));
+        //this.emit(':tell', this.t(""));
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t("HELP_MESSAGE");
@@ -104,7 +110,7 @@ var languageStrings = {
 };
 
 
-function handleUserIntent(cardTitle, intent) {
+function handleUserIntent(cardTitle, intent, handler) {
     var repromptText = "";
     var sessionAttributes = {};
     var shouldEndSession = false;
@@ -193,8 +199,29 @@ function handleUserIntent(cardTitle, intent) {
     }
 
     if (publish) {
-        ably_channel.publish("update", body);
-        console.log("Published: %s", body);
+        //ably_channel.publish("update", body);
+        var req = unirest("POST", "https://rest.ably.io/channels/AH_Test/messages");
+        var finished = false;
+
+        req.headers({
+                "cache-control": "no-cache",
+                "authorization": "Basic UVlpQ1pBLm5kVFQ5dzpmdVdzdDJXSXV2UlYtWDk0",
+                "content-type": "application/json"
+        });
+
+        req.type("json");
+        req.send({
+            "name": "Test",
+            "data": body 
+        });
+
+        req.end(function (res) {
+            if (res.error) throw new Error(res.error);
+            console.log("Ending...");
+            console.log(res.body);
+            console.log("Published: %s", JSON.stringify(body));
+            handler.emit(':tell', speechOutput);
+        });
     }   
-    return [speechOutput, body]
+    //return [speechOutput, body]
 }

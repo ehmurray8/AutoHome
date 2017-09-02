@@ -14,7 +14,7 @@ channel.subscribe(function(msg) {
     handle_msg(msg);
 });
 
-//channel.publish("Test", {"key":"value"});
+channel.publish("Test", {"key":"value"});
 
 
 function handle_msg(message) {

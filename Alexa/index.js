@@ -181,7 +181,7 @@ function handleUserIntent(cardTitle, intent) {
             body[dir] = dirSlot.value.toUperCase();
             body[num] = Number(numSlot.value);
         } else {
-            speechOutput = "Input " + dirSlot.value + by 1.";
+            speechOutput = "Input " + dirSlot.value + "by 1.";
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         }

@@ -7,9 +7,7 @@ var consts = require("./constants.js");
 var ably_info = require("./ably_info.js");
 
 //var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
-//var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN);
-
-
+//var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN); 
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -33,41 +31,21 @@ var handlers = {
     },
     'SocketIntent': function() {
         handleUserIntent(consts.SOCK_INTENT, this.event.request.intent, this);
-        //speechOutput = rets[0];
-        //repromptSpeech = "Another Command?";
-        //this.attributes.speechOutput = speechOutput; 
-        //this.attributes.repromptSpeech = repromptSpeech;
-
-        //this.emit(':tell', this.t(""));
-        //this.emit(':tell', speechOutput);
     },
     'TVChannelIntent': function() {
         handleUserIntent(consts.CHAN_INTENT, this.event.request.intent, this);
-        //speechOutput = rets[0];
-        //repromptSpeech = "Another Command?";
-        //this.attributes.speechOutput = speechOutput; 
-        //this.attributes.repromptSpeech = repromptSpeech;
-
-        //this.emit(':tell', this.t(""));
     },
     'TVVolumeIntent': function() {
         handleUserIntent(consts.VOL_INTENT, this.event.request.intent, this);
-        //speechOutput = rets[0];
-        //repromptSpeech = "Another Command?";
-        //speechOutput += repromptSpeech; 
-        //this.attributes.speechOutput = speechOutput; 
-        //this.attributes.repromptSpeech = repromptSpeech;
-
-        //this.emit(':tell', this.t(""));
     },
     'TVKeyIntent': function() {
         handleUserIntent(consts.KEY_INTENT, this.event.request.intent, this);
-        //speechOutput = rets[0];
-        //repromptSpeech = "Another Command?";
-        //speechOutput += repromptSpeech; 
-        //this.attributes.repromptSpeech = repromptSpeech;
-
-        //this.emit(':tell', this.t(""));
+    },
+    'TVInputIntent': function() {
+        handleUserIntent(consts.INPUT_INTENT, this.event.request.intent, this);
+    },
+    'LightsIntent': function() [
+        handleUserIntent(conts.LIGHTS_INTENT, this.event.request.intent, this);
     },
     'AMAZON.HelpIntent': function () {
         this.attributes.speechOutput = this.t("HELP_MESSAGE");
@@ -193,13 +171,18 @@ function handleUserIntent(cardTitle, intent, handler) {
         var keySlot = intent.slots.key;
         speechOutput = "You pressed key " + keySlot.value;
         body[type] = helpers.convertKey(keySlot.value);
+    } else if (cardTitle === consts.LIGHTS_INTENT) {
+        body[func_key] = consts.LIGHTS_FUNC;
+        var state = "State";
+        stateSlot = intent.slots.state;
+        speechOutput = "Lights " + stateSlot.value;
+        body[state] = stateSlot.value;
     } else {
         speechOutput = "Invalid Command";
         publish = false;
     }
 
     if (publish) {
-        //ably_channel.publish("update", body);
         var req = unirest("POST", "https://rest.ably.io/channels/AH_Test/messages");
         var finished = false;
 
@@ -223,5 +206,4 @@ function handleUserIntent(cardTitle, intent, handler) {
             handler.emit(':tell', speechOutput);
         });
     }   
-    //return [speechOutput, body]
 }

@@ -21,9 +21,11 @@ function handle_msg(message) {
 
     var scriptName = "";
     var params = "";
+    var params2 = "";
 
     var func = "";
     var valid = true;
+    var multFuncs = false
     try {
         message = message.data;
         var innerMsg = message.message;
@@ -56,6 +58,11 @@ function handle_msg(message) {
             scriptName = "key";
             params = "POWER";
         }
+    } else if(func == "Lights") {
+        multFuncs = true;
+        scriptName = "socket";
+        params = 2 + " " + innerMsg["State"].toLowerCase();
+        params2 = 5 + " " + innerMsg["State"].toLowerCase();
     } else {
         console.log(func);
         valid = false;        
@@ -64,5 +71,8 @@ function handle_msg(message) {
     
     if(valid) { 
         shell.exec("sudo " + scriptsPath + scriptName + " " + params);
+        if (multFuncs) {
+            shell.exec("sudo " + scriptsPath + scriptName + " " + params);
+        }
     }
 }

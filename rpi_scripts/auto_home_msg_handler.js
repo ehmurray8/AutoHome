@@ -22,9 +22,15 @@ function handle_msg(message) {
     var scriptName = "";
     var params = "";
 
-    message = message.data;
-    var innerMsg = message.message;
-    var func = innerMsg["Function Name"];
+    var func = "";
+    var valid = true;
+    try {
+        message = message.data;
+        var innerMsg = message.message;
+        func = innerMsg["Function Name"];
+    catch (e) {
+        func = "Invalid.";
+    }
     if (func == "Channel") {
         scriptName = "chng_channel";
         if(innerMsg.hasOwnProperty("Channel Number")) {
@@ -50,7 +56,13 @@ function handle_msg(message) {
             scriptName = "key";
             params = "POWER";
         }
+    } else {
+        console.log(func);
+        valid = false;        
     }
+
     
-    shell.exec("sudo " + scriptsPath + scriptName + " " + params);
+    if(valid) { 
+        shell.exec("sudo " + scriptsPath + scriptName + " " + params);
+    }
 }

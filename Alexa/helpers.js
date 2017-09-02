@@ -51,6 +51,7 @@ module.exports = {
 
     convertSocket:function(socketStr) {
         socketStr = socketStr.toLowerCase();
+        console.log(socketStr);
         if (socketStr == "overhead light") {
             return "2";
         } else if (socketStr == "fan") {

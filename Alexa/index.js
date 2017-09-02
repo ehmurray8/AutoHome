@@ -1,13 +1,9 @@
 var Alexa = require('alexa-sdk');
 var unirest = require("unirest");
-//var Ably = require('ably'); 
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307"; 
-var helpers = require("./helpers.js");
+var helpers = require("./helpers.js"); 
 var consts = require("./constants.js");
 var ably_info = require("./ably_info.js");
-
-//var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
-//var ably_channel = realtime.channels.get(ably_info.ABLY_CHAN); 
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -26,8 +22,7 @@ var handlers = {
         this.attributes.speechOutput = this.t("WELCOME_MESSAGE", this.t("SKILL_NAME"));
         // If the user either does not reply to the welcome message or says something that is not
         // understood, they will be prompted again with this text.
-        this.attributes.repromptSpeech = this.t("WELCOME_REPROMPT");
-        this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
+        this.attributes.repromptSpeech = this.t("WELCOME_REPROMPT"); this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
     'SocketIntent': function() {
         handleUserIntent(consts.SOCK_INTENT, this.event.request.intent, this);
@@ -156,7 +151,7 @@ function handleUserIntent(cardTitle, intent, handler) {
             body[num] = 1;
         }
     } else if (cardTitle === consts.INPUT_INTENT) {
-        body[func_key] = consts.CHAN_FUNC;
+        body[func_key] = consts.INPUT_FUNC;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
@@ -166,7 +161,7 @@ function handleUserIntent(cardTitle, intent, handler) {
         } else {
             speechOutput = "Input " + dirSlot.value + "by 1.";
             body[dir] = dirSlot.value.toUpperCase();
-            body[num] = Number(numSlot.value);
+            body[num] = 1;
         }
     } else if (cardTitle === consts.KEY_INTENT) {
         body[func_key] = consts.KEY_FUNC;
@@ -188,12 +183,12 @@ function handleUserIntent(cardTitle, intent, handler) {
     }
 
     if (publish) {
-        var req = unirest("POST", "https://rest.ably.io/channels/AH_Test/messages");
+        var req = unirest("POST", "https://rest.ably.io/channels/" + ably_info.ABLY_CHAN + "/messages");
         var finished = false;
 
         req.headers({
                 "cache-control": "no-cache",
-                "authorization": "Basic UVlpQ1pBLm5kVFQ5dzpmdVdzdDJXSXV2UlYtWDk0",
+                "authorization": ably_info.ABLY_AUTH,
                 "content-type": "application/json"
         });
 
@@ -208,7 +203,8 @@ function handleUserIntent(cardTitle, intent, handler) {
             console.log("Ending...");
             console.log(res.body);
             console.log("Published: %s", JSON.stringify(body));
-            handler.emit(':tell', speechOutput);
+            //handler.emit(':tell', speechOutput);
+            handler.emit(':tell', "");
         });
     }   
 }

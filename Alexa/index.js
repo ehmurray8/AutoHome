@@ -1,8 +1,5 @@
 var Alexa = require('alexa-sdk');
-//var sleep = require("sleep");
-var Ably = require('ably');
-var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307";
-var helpers = require("./helpers.js");
+var Ably = require('ably'); var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307"; var helpers = require("./helpers.js");
 var consts = require("./constants.js");
 var ably_info = require("./ably_info.js");
 
@@ -35,7 +32,6 @@ var handlers = {
         repromptSpeech = "Another Command?";
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        //sleep.msleep(150);
 
         this.emit(':tell', this.t(""));
     },
@@ -45,7 +41,6 @@ var handlers = {
         repromptSpeech = "Another Command?";
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        //sleep.msleep(150);
 
         this.emit(':tell', this.t(""));
     },
@@ -56,7 +51,6 @@ var handlers = {
         speechOutput += repromptSpeech; 
         this.attributes.speechOutput = speechOutput; 
         this.attributes.repromptSpeech = repromptSpeech;
-        //sleep.msleep(150);
 
         this.emit(':tell', this.t(""));
     },
@@ -66,7 +60,6 @@ var handlers = {
         repromptSpeech = "Another Command?";
         speechOutput += repromptSpeech; 
         this.attributes.repromptSpeech = repromptSpeech;
-        //sleep.msleep(150);
 
         this.emit(':tell', this.t(""));
     },
@@ -124,6 +117,9 @@ function handleUserIntent(cardTitle, intent) {
     var func_key = consts.FUNC_KEY;
     var dir = consts.DIR_KEY;
     var num = consts.NUM_KEY;
+
+    console.log(cardTitle);
+
     if(cardTitle === consts.SOCK_INTENT) {
         body[func_key] = consts.SOCK_FUNC;
         var sockType = consts.SOCK_TYPE_KEY;
@@ -198,6 +194,7 @@ function handleUserIntent(cardTitle, intent) {
 
     if (publish) {
         ably_channel.publish("update", body);
+        console.log("Published: %s", body);
     }   
-    return [speechOutput, body];
+    return [speechOutput, body]
 }

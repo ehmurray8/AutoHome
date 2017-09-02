@@ -9,7 +9,8 @@ var scriptspath = "~/autohome/rpi_scripts/";
 var scriptName = "";
 var params = "";
 
-var realtime = new Ably.Realtime({key:ably_info.ABLY_KEY});
+console.log(ably_info.ABLY_KEY);
+var realtime = new Ably.Realtime({key:'"' + ably_info.ABLY_KEY + '"'});
 var channel = realtime.channels.get(ably_info.ABLY_CHAN);
 
 function subscribe() {

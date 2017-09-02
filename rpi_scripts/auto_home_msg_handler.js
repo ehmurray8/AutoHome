@@ -28,7 +28,7 @@ function handle_msg(message) {
         message = message.data;
         var innerMsg = message.message;
         func = innerMsg["Function Name"];
-    catch (e) {
+    } catch (e) {
         func = "Invalid.";
     }
     if (func == "Channel") {

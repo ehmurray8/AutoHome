@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path="$HOME/Documents/socket_scripts/socket"
+path="/home/pi/AutoHome/rpi_scripts/socket"
 
 "$path" 4 OFF
 

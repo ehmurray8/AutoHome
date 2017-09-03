@@ -1,6 +1,7 @@
 #!/bin/bash
 
 path="/home/pi/AutoHome/rpi_scripts/socket"
+path_key="/home/pi/AutoHome/rpi_scripts/key"
 
 "$path" 4 on 
 
@@ -9,3 +10,5 @@ path="/home/pi/AutoHome/rpi_scripts/socket"
 "$path" 2 off
 
 "$path" 5 off
+
+"$path_key" POWER

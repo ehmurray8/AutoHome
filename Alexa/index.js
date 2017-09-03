@@ -2,7 +2,8 @@ var Alexa = require('alexa-sdk');
 var unirest = require("unirest");
 var APP_ID = "amzn1.ask.skill.b507b06c-9eec-4fee-b4c0-14e66a330307"; 
 var helpers = require("./helpers.js"); 
-var consts = require("./constants.js"); var ably_info = require("./ably_info.js");
+var consts = require("./constants.js"); 
+var ably_info = require("./ably_info.js");
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);

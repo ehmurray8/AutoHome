@@ -9,9 +9,7 @@ var channel = realtime.channels.get(ably_info.ABLY_CHAN);
 
 channel.subscribe(function(msg) {
     handle_msg(msg);
-});
-
-
+}); 
 function handle_msg(message) {
 
     var scriptName = "";

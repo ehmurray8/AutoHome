@@ -181,7 +181,7 @@ function handleUserIntent(cardTitle, intent, handler) {
     } else if (cardTitle === consts.SLEEP_INTENT) {
         body[func_key] = consts.SLEEP_FUNC;
     } else if (cardTitle === consts.AWAKE_INTENT) {
-        body[func_key] = consts.AWAKE_FUNC;   
+        body[func_key] = consts.AWAKE_FUNC;
     } else {
         speechOutput = "Invalid Command";
         publish = false;

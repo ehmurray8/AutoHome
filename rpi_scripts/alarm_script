@@ -1,11 +1,11 @@
 #!/bin/bash
 
-path="$HOME/Documents/socket_scripts/socket"
+path="/home/pi/AutoHome/rpi_scripts/socket"
 
-"$path" 4 OFF
+"$path" 4 off
 
-"$path" 3 OFF
+"$path" 3 off
 
-"$path" 2 ON
+"$path" 2 on
 
-"$path" 5 ON
+"$path" 5 on

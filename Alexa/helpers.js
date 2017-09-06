@@ -51,13 +51,14 @@ module.exports = {
 
     convertSocket:function(socketStr) {
         socketStr = socketStr.toLowerCase();
-        if (socketStr == "bed lamp") {
+        console.log(socketStr);
+        if (socketStr == "overhead light") {
             return "2";
         } else if (socketStr == "fan") {
             return "3";
-        } else if (socketStr == "a/c" || socketStr == "air conditioning") {
+        } else if (socketStr == "ac" || socketStr == "air conditioning" || socketStr == "a/c") {
             return "4";
-        } else if (socketStr == "desk lamp") {
+        } else if (socketStr == "lamp") {
             return "5";
         } else {
             return socketStr;

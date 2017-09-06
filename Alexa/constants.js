@@ -7,6 +7,9 @@ const VOL_INTENT = "TVVolumeIntent";
 const SOCK_INTENT = "SocketIntent";
 const INPUT_INTENT = "TVInputIntent";
 const KEY_INTENT = "TVKeyIntent";
+const LIGHTS_INTENT = "LightsIntent";
+const SLEEP_INTENT = "SleepIntent";
+const AWAKE_INTENT = "AwakeIntent";
 
 /*
  * General Output
@@ -44,13 +47,14 @@ const CHAN_FUNC = "Channel";
 const VOL_FUNC = "Volume";
 const INPUT_FUNC = "Input";
 const KEY_FUNC = "Key";
+const LIGHTS_FUNC = "Lights";
+const SLEEP_FUNC = "Sleep";
+const AWAKE_FUNC = "Awake";
 
 /*
  * Other JSON
  */ 
 const TV_SOCKET = "TV";
-
-
 
 
 module.exports = {
@@ -59,6 +63,9 @@ module.exports = {
     SOCK_INTENT: SOCK_INTENT,
     INPUT_INTENT: INPUT_INTENT,
     KEY_INTENT: KEY_INTENT,
+    LIGHTS_INTENT: LIGHTS_INTENT,
+    SLEEP_INTENT: SLEEP_INTENT,
+    AWAKE_INTENT: AWAKE_INTENT,
     REPROMPT: REPROMPT,            
     WEL_TITLE: WEL_TITLE,
     WEL_SPEECH_OUT: WEL_SPEECH_OUT,    
@@ -76,8 +83,8 @@ module.exports = {
     VOL_FUNC: VOL_FUNC,
     INPUT_FUNC: INPUT_FUNC,
     KEY_FUNC: KEY_FUNC,
+    LIGHTS_FUNC: LIGHTS_FUNC,
+    SLEEP_FUNC: SLEEP_FUNC,
+    AWAKE_FUNC: AWAKE_FUNC,
     TV_SOCKET: TV_SOCKET,
-    PUBNUB_KEY_P: PUBNUB_KEY_P,
-    PUBNUB_KEY_S: PUBNUB_KEY_S,
-    PUBNUB_CHANNEL: PUBNUB_CHANNEL
 };

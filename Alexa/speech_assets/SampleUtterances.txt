@@ -1,0 +1,41 @@
+TVChannelIntent change the channel to {channel}
+TVChannelIntent channel {channel}
+TVChannelIntent go to {channel}
+TVChannelIntent channel {direction} by {number}
+TVChannelIntent channel {direction}
+TVChannelIntent change channel {direction}
+TVChannelIntent {direction} {number} channels
+TVChannelIntent channel {direction} {number}
+TVVolumeIntent volume {direction} by {number}
+TVVolumeIntent volume {direction}
+TVVolumeIntent volume {direction} {number}
+TVInputIntent input {direction} {number}
+TVInputIntent input {direction}
+TVInputIntent move input {direction}
+TVInputIntent move input {direction} by {number}
+TVInputIntent move input {direction} {number}
+TVKeyIntent key {key}
+TVKeyIntent press {key}
+TVKeyIntent {key} key
+LightsIntent turn lights {state}
+LightsIntent turn {state} lights
+SocketIntent turn the {socket} {state}
+SocketIntent turn {state} the {socket}
+SocketIntent {socket} {state}
+SocketIntent turn {state} {socket}
+SocketIntent turn socket {socket} {state}
+SleepIntent sleep
+SleepIntent start sleep
+SleepIntent sleep on
+AwakeIntent awake
+AwakeIntent wake up
+AMAZON.StartOverIntent start game
+AMAZON.StartOverIntent new game
+AMAZON.StartOverIntent start
+AMAZON.StartOverIntent start new game
+AMAZON.StartOverIntent start a game
+AMAZON.StartOverIntent start a new  game
+AMAZON.HelpIntent help
+AMAZON.HelpIntent help me
+AMAZON.HelpIntent what can I ask
+AMAZON.HelpIntent what can I do

@@ -1,0 +1,105 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "direction",
+          "type": "DIRECTION"
+        },
+        {
+          "name": "number",
+          "type": "AMAZON.NUMBER"
+        },
+        {
+          "name": "channel",
+          "type": "TV_CHANNELS"
+        }
+      ],
+      "intent": "TVChannelIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "direction",
+          "type": "DIRECTION"
+        },
+        {
+          "name": "number",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "TVVolumeIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "direction",
+          "type": "DIRECTION"
+        },
+        {
+          "name": "number",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "TVInputIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "key",
+          "type": "TV_KEYS"
+        }
+      ],
+      "intent": "TVKeyIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "state",
+          "type": "POWER_STATE"
+        }
+      ],
+      "intent": "LightsIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "socket",
+          "type": "SOCKET_DEVICE"
+        },
+        {
+          "name": "state",
+          "type": "POWER_STATE"
+        }
+      ],
+      "intent": "SocketIntent"
+    },
+    {
+      "intent": "SleepIntent"
+    },
+    {
+      "intent": "AwakeIntent"
+    },
+    {
+      "intent": "AMAZON.StartOverIntent"
+    },
+    {
+      "intent": "AMAZON.RepeatIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ var realtime = new Ably.Realtime({key: ably_info.ABLY_KEY});
 var channel = realtime.channels.get(ably_info.ALARM_CHAN);
 
 var alarm = null;
+var musicJob = null;
 
 channel.subscribe(function(msg) {
     handle_msg(msg);
@@ -16,12 +17,19 @@ channel.subscribe(function(msg) {
 function handle_msg(message) {
     var alarmTime;
     var valid = true;
+    var music = null;
     try {
         message = message.data;
         alarmTime = message.Alarm;
     } catch (e) {
         valid = false;
     }
+
+    try {
+        music = message.Music;
+    } catch(e) {
+    }
+
     if (!valid){
         console.log(func);
         valid = false;
@@ -40,6 +48,24 @@ function handle_msg(message) {
                     shell.exec(cmd);             
                     alarm = null;
                 });
+                if(musicJob != null) {
+                    musicJob.cancel();
+                }
+                if(music != null) {
+                    date += 15000;
+                    musicJob = schedule.ScheduleJob(date, function(){
+                        var req = "curl -X POST   'https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?accept=audio%2Fwav&text=";
+                        var tail = "' -H 'authorization: Basic YjY5MmFkMzUtZDVhYi00NTQxLWE2ZmItMmZhZWI1NmE3MGJjOmI0czg4SUp5WEVGZw==' > command.wav";
+                        music = encodeURIComponent(music.trim());
+                        music = "Wake%20up!%20Wake%20up!%20Wake%20up!%20Wake%20up!$20Wake%20up!%20Wake%20up!%20Alexa%20Play%20" + music;
+                        var fullReq = cmd + music + tail;
+                        shell.exec(fullReq);
+                        shell.exec("ffmpeg -i command.wav -c:a libvorbis -qscale:a 5 command.ogg");
+                        shell.exec("omxplayer -o hdmi command.ogg");
+                        musicJob = null;
+                        music = null;
+                    });
+                }
             }
         } catch(e) {
             valid = false;

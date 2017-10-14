@@ -53,15 +53,16 @@ function handle_msg(message) {
                 }
                 if(music != null) {
                     date += 15000;
-                    musicJob = schedule.ScheduleJob(date, function(){
+                    musicJob = schedule.scheduleJob(date, function(){
                         var req = "curl -X POST   'https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?accept=audio%2Fwav&text=";
                         var tail = "' -H 'authorization: Basic YjY5MmFkMzUtZDVhYi00NTQxLWE2ZmItMmZhZWI1NmE3MGJjOmI0czg4SUp5WEVGZw==' > command.wav";
                         music = encodeURIComponent(music.trim());
                         music = "Wake%20up!%20Wake%20up!%20Wake%20up!%20Wake%20up!$20Wake%20up!%20Wake%20up!%20Alexa%20Play%20" + music;
-                        var fullReq = cmd + music + tail;
+                        var fullReq = req + music + tail;
                         shell.exec(fullReq);
-                        shell.exec("ffmpeg -i command.wav -c:a libvorbis -qscale:a 5 command.ogg");
+                        shell.exec("ffmpeg -i command.wav command.ogg");
                         shell.exec("omxplayer -o hdmi command.ogg");
+                        shell.exec("rm command.ogg");
                         musicJob = null;
                         music = null;
                     });

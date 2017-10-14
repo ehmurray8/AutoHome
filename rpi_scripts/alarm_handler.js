@@ -14,6 +14,7 @@ var musicJob = null;
 channel.subscribe(function(msg) {
     handle_msg(msg);
 }); 
+
 function handle_msg(message) {
     var alarmTime;
     var valid = true;
@@ -31,12 +32,11 @@ function handle_msg(message) {
     }
 
     if (!valid){
-        console.log(func);
         valid = false;
     } else {
         var date;
         try {
-            date = new Date(int(alarm_time));
+            date = new Date(alarmTime);
             var currDate = new Date();
             if(date - currDate > 1000) {
                 if(alarm != null) {
@@ -69,6 +69,7 @@ function handle_msg(message) {
             }
         } catch(e) {
             valid = false;
+            console.log(e);
         }
     }
 }

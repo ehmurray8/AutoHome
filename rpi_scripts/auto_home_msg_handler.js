@@ -18,7 +18,7 @@ function handle_msg(message) {
 
     var func = "";
     var valid = true;
-    var multFuncs = false
+    var multFuncs = false;
     try {
         message = message.data;
         func = message["Function Name"];

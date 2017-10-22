@@ -25,5 +25,3 @@ fi
 irsend SEND_ONCE insignia KEY_ENTER
 sleep .01
 irsend SEND_ONCE insignia KEY_ENTER
-
-/etc/init.d/lirc stop

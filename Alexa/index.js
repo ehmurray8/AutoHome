@@ -90,9 +90,6 @@ var languageStrings = {
 
 
 function handleUserIntent(cardTitle, intent, handler) {
-    var repromptText = "";
-    var sessionAttributes = {};
-    var shouldEndSession = false;
     var speechOutput = "";
     var numSlot = "";
     var dirSlot = "";

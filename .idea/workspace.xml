@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1936f715-899e-4a3c-9fb1-97f237631dc8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Alexa/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Alexa/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Alexa/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Alexa/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpi_scripts/auto_home_msg_handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_scripts/auto_home_msg_handler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpi_scripts/sleep_script" beforeDir="false" afterPath="$PROJECT_DIR$/rpi_scripts/sleep_script" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="power_script" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rpi_scripts/power_script">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="auto_home_msg_handler.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rpi_scripts/auto_home_msg_handler.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dropbox_looker" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rpi_scripts/dropbox_looker">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="key" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rpi_scripts/key">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="sleep_script" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rpi_scripts/sleep_script">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/rpi_scripts/sleep_script" />
+        <option value="$PROJECT_DIR$/rpi_scripts/power_script" />
+        <option value="$PROJECT_DIR$/rpi_scripts/auto_home_msg_handler.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/Alexa/node_modules/ably/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/ajv/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/buffer/node_modules/base64-js/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/buffer/node_modules/ieee754/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/buffer/node_modules/isarray/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/buffer/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/crypto-browserify/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/crypto-browserify/test/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/events/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/jmespath/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/querystring/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/sax/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/url/node_modules/punycode/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/url/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/uuid/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/xml2js/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/xmlbuilder/node_modules/lodash/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/node_modules/xmlbuilder/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/i18next-sprintf-postprocessor/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/i18next/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/asn1/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/asynckit/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/aws-sign2/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/aws4/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/base64-js/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/bcrypt-pbkdf/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/boom/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/bops/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/caseless/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/co/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/combined-stream/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/core-util-is/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/cryptiles/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/dashdash/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/dashdash/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/delayed-stream/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/ecc-jsbn/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/extend/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/extsprintf/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/forever-agent/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/form-data/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/getpass/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/getpass/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/har-schema/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/har-validator/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/hawk/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/hoek/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/http-signature/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/is-typedarray/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/isstream/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/jsbn/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/json-schema/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/json-stable-stringify/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/json-stringify-safe/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/jsonify/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/jsprim/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/jsprim/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/mime-db/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/mime-types/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/msgpack-js/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/oauth-sign/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/options/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/performance-now/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/pubnub/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/agent-base/node_modules/semver/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/pubnub/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/agent-base/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/pubnub/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/https-proxy-agent/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/pubnub/node_modules/superagent-proxy/node_modules/proxy-agent/node_modules/pac-proxy-agent/node_modules/pac-resolver/node_modules/degenerator/node_modules/escodegen/node_modules/esprima/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/punycode/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/qs/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/request/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/safe-buffer/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/sntp/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/sshpk/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/sshpk/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/stringstream/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/to-utf8/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/tough-cookie/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/tunnel-agent/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/tweetnacl/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/ultron/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/undefined/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/uuid/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/verror/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/verror/package.json" />
+      <path value="$PROJECT_DIR$/Alexa/node_modules/ws/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/ably/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/ajv/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/asn1/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/asynckit/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/aws-sign2/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/aws4/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/balanced-match/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/base64-js/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/bcrypt-pbkdf/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/boom/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/bops/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/brace-expansion/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/caseless/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/co/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/combined-stream/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/concat-map/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/core-util-is/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/cryptiles/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/dashdash/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/dashdash/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/delayed-stream/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/ecc-jsbn/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/extend/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/extsprintf/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/forever-agent/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/form-data/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/fs.realpath/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/getpass/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/getpass/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/glob/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/har-schema/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/har-validator/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/hawk/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/hoek/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/http-signature/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/inflight/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/inherits/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/interpret/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/is-typedarray/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/isstream/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/jsbn/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/json-schema/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/json-stable-stringify/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/json-stringify-safe/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/jsonify/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/jsprim/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/jsprim/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/mime-db/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/mime-types/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/minimatch/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/msgpack-js/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/oauth-sign/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/once/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/options/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/path-is-absolute/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/path-parse/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/performance-now/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/punycode/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/qs/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/rechoir/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/request/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/resolve/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/resolve/test/module_dir/zmodules/bbb/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/resolve/test/resolver/baz/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/resolve/test/resolver/dot_main/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/resolve/test/resolver/dot_slash_main/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/resolve/test/resolver/incorrect_main/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/safe-buffer/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/shelljs/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/sntp/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/sshpk/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/sshpk/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/stringstream/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/to-utf8/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/tough-cookie/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/tunnel-agent/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/tweetnacl/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/ultron/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/uuid/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/verror/node_modules/assert-plus/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/verror/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/wrappy/package.json" />
+      <path value="$PROJECT_DIR$/rpi_scripts/node_modules/ws/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="65" />
+    <option name="y" value="35" />
+    <option name="width" value="1400" />
+    <option name="height" value="888" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="AutoHome" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AutoHome" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="AutoHome" type="b2602c69:ProjectViewProjectNode" />
+              <item name="AutoHome" type="462c0819:PsiDirectoryNode" />
+              <item name="rpi_scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1936f715-899e-4a3c-9fb1-97f237631dc8" name="Default" comment="" />
+      <created>1526098716486</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1526098716486</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="SciView" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Alexa/node_modules/alexa-sdk/node_modules/aws-sdk/scripts/services-table-generator.js" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/rpi_scripts/power_script">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpi_scripts/dropbox_looker">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpi_scripts/alarm_script">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpi_scripts/auto_home_msg_handler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpi_scripts/sleep_script">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpi_scripts/key">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>

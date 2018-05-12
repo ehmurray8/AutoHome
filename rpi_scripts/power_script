@@ -1,0 +1,13 @@
+#!/bin/bash
+
+path="/home/pi/AutoHome/rpi_scripts/socket"
+
+"$path" 1 $1
+
+"$path" 2 $1
+
+"$path" 3 $1
+
+"$path" 4 $1
+
+"$path" 5 $1

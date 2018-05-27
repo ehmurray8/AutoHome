@@ -1,0 +1,64 @@
+TBN, 2
+NBC, 2 0 3
+The CW, 2 0 4
+ABC, 2 0 6
+PBS, 2 0 5
+FOX, 2 0 8
+CBS, 2 0 1
+USA, 1 2
+Nickelodeon, 1 3
+HSN, 1 6
+Cartoon Network, 2 3
+Lifetime, 2 5
+MTV, 2 9
+FOX Sports Ohio, 3 0
+Golf Channel, 3 1
+FXX, 3 2
+ESPN, 3 3
+ESPN 2, 3 4
+TNT, 3 5
+AMC, 3 6
+Bravo, 3 7
+Food Network, 3 8
+HGTV, 3 9
+Turner Classic Movies, 4 0
+Freeform, 4 1
+TLC, 4 2
+National Geographic, 4 3
+SyFy, 4 4
+A&E, 4 5
+History Channel, 4 6
+Discovery Channel, 4 7
+TBS, 4 9
+CNBC, 5 0
+CNN, 5 1
+HLN, 5 2
+MSNBC, 5 3
+Animal Planet, 5 4
+FOX News Channel, 5 5
+Tennis Channel, 5 6
+SportsTime Ohio, 5 7
+Spike, 5 8
+BET, 5 9
+CMT, 6 0
+Travel Channel, 6 1
+The Weather Channel, 6 2
+FX, 6 4
+Lifetime Movie Network, 6 5
+TV Land, 6 6 
+TruTV, 6 7
+OWN, 6 8
+MTV2, 6 9
+FS1, 7 0
+Hallmark Movies and Mysteries, 7 1
+WE TV, 7 2
+WGN America, 7 3
+Sundance, 7 4
+IFC, 7 5
+FXM, 7 7
+FOX Sports Ohio 2, 7 8
+Hallmark Channel, 8 1
+FOX Business, 8 2
+Investigation Discovery, 8 3
+Big Ten Network, 8 7
+NBC Sports Network, 8 8

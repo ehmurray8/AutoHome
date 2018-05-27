@@ -59,6 +59,9 @@ function handle_msg(message) {
         scriptName = "sleep_script";
     } else if (func == "Awake") {
         scriptName = "alarm_script"; 
+    } else if (func == "Power") {
+        scriptName = "power_script";
+        params = message.State.toLowerCase();
     } else {
         console.log(func);
         valid = false;        

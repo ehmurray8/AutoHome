@@ -1,0 +1,15 @@
+{
+  "name": "ah-alexa",
+  "version": "1.0.0",
+  "description": "Auto Home Alexa Skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emmet Murray",
+  "license": "ISC",
+  "dependencies": {
+    "alexa-sdk": "^1.0.25",
+    "unirest": "^0.5.1"
+  }
+}

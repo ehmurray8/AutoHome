@@ -16,7 +16,6 @@ exports.handler = function(event, context, callback) {
 
 var handlers = {
     'LaunchRequest': function () {
-        this.attributes.speechOutput = this.t("WELCOME_MESSAGE", this.t("SKILL_NAME"));
         this.attributes.repromptSpeech = this.t("WELCOME_REPROMPT"); this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
     'SocketIntent': function() {
@@ -85,7 +84,6 @@ var languageStrings = {
 
 
 function handleUserIntent(cardTitle, intent, handler) {
-    var speechOutput = "";
     var numSlot = "";
     var dirSlot = "";
 
@@ -103,12 +101,10 @@ function handleUserIntent(cardTitle, intent, handler) {
         var sockState = consts.SOCK_STATE_KEY;
         var socketSlot = intent.slots.socket; 
         if(socketSlot.value == consts.TV_SOCKET) { 
-            speechOutput = "TV Power"; 
             body[sockType] = consts.TV_SOCKET;
             body[consts.TV_STATE] = stateSlot.value.toUpperCase();
         } else {
             var stateSlot = intent.slots.state;
-            speechOutput = "Turn " + stateSlot.value + " " + socketSlot.value;
             body[sockType] = helpers.convertSocket(socketSlot.value);
             body[sockState] = stateSlot.value.toUpperCase();
         }
@@ -119,29 +115,24 @@ function handleUserIntent(cardTitle, intent, handler) {
         dirSlot = intent.slots.direction;
         if(dirSlot.value) {
             if(numSlot.value) {
-                speechOutput = "Channel Direction was " + dirSlot.value + ", and Number was " + numSlot.value;
                 body[dir] = dirSlot.value.toUpperCase();
                 body[num] = Number(numSlot.value);
             } else {
-                speechOutput = "Channel " + dirSlot.value + "by 1";
                 body[dir] = dirSlot.value.toUpperCase();
                 body[num] = 1;
             }
         } else {
             var chanSlot = intent.slots.channel;
-            speechOutput = "Change channel to channel " + chanSlot.value;
-            body[chan] = helpers.convertChannel(chanSlot.value);
+            body[chan] = chanSlot.value;
         }
     } else if (cardTitle === consts.VOL_INTENT) {
         body[func_key] = consts.VOL_FUNC;
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = "Volume Direction was " + dirSlot.value + ", and Number was " + numSlot.value;
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = Number(numSlot.value);
         } else {
-            speechOutput = "Volume " + dirSlot.value + "by 1.";
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = 1;
         }
@@ -150,11 +141,9 @@ function handleUserIntent(cardTitle, intent, handler) {
         numSlot = intent.slots.number;
         dirSlot = intent.slots.direction;
         if(numSlot.value) {
-            speechOutput = "Input Direction was " + dirSlot.value + ", and Number was " + numSlot.value;
             body[dir] = dirSlot.value.toUperCase();
             body[num] = Number(numSlot.value);
         } else {
-            speechOutput = "Input " + dirSlot.value + "by 1.";
             body[dir] = dirSlot.value.toUpperCase();
             body[num] = 1;
         }
@@ -162,13 +151,11 @@ function handleUserIntent(cardTitle, intent, handler) {
         body[func_key] = consts.KEY_FUNC;
         var type = "Key Type";
         var keySlot = intent.slots.key;
-        speechOutput = "You pressed key " + keySlot.value;
-        body[type] = helpers.convertKey(keySlot.value);
+        body[type] = keySlot.value;
     } else if (cardTitle === consts.LIGHTS_INTENT) {
         body[func_key] = consts.LIGHTS_FUNC;
         var state = "State";
         stateSlot = intent.slots.state;
-        speechOutput = "Lights " + stateSlot.value;
         body[state] = stateSlot.value;
     } else if (cardTitle === consts.SLEEP_INTENT) {
         body[func_key] = consts.SLEEP_FUNC;
@@ -200,8 +187,11 @@ function handleUserIntent(cardTitle, intent, handler) {
             console.log("Ending...");
             console.log(res.body);
             console.log("Published: %s", JSON.stringify(body));
-            //handler.emit(':tell', speechOutput);
-            handler.emit(':tell', "");
+            if (speechOutput) {
+                handler.emit(':tell', speechOutput);
+            } else {
+                handler.emit(':tell', "Ok");
+            }
         });
     }   
 }

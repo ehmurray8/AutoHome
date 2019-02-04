@@ -9,19 +9,14 @@ exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
     alexa.APP_ID = APP_ID;
 
-    // To enable string internationalization (i18n) features, set a resources object.
     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
 
 var handlers = {
-    //Use LaunchRequest, instead of NewSession if you want to use the one-shot model
-    // Alexa, ask [my-skill-invocation-name] to (do something)...
     'LaunchRequest': function () {
         this.attributes.speechOutput = this.t("WELCOME_MESSAGE", this.t("SKILL_NAME"));
-        // If the user either does not reply to the welcome message or says something that is not
-        // understood, they will be prompted again with this text.
         this.attributes.repromptSpeech = this.t("WELCOME_REPROMPT"); this.emit(':ask', this.attributes.speechOutput, this.attributes.repromptSpeech);
     },
     'SocketIntent': function() {
@@ -107,10 +102,10 @@ function handleUserIntent(cardTitle, intent, handler) {
         var sockType = consts.SOCK_TYPE_KEY;
         var sockState = consts.SOCK_STATE_KEY;
         var socketSlot = intent.slots.socket; 
-        if(socketSlot.value == consts.TV_SOCKET) 
-        { 
+        if(socketSlot.value == consts.TV_SOCKET) { 
             speechOutput = "TV Power"; 
             body[sockType] = consts.TV_SOCKET;
+            body[consts.TV_STATE] = stateSlot.value.toUpperCase();
         } else {
             var stateSlot = intent.slots.state;
             speechOutput = "Turn " + stateSlot.value + " " + socketSlot.value;

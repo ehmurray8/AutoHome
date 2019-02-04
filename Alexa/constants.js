@@ -37,6 +37,7 @@ const DIR_KEY = "Direction";
 const NUM_KEY = "Number";
 const SOCK_TYPE_KEY = "Socket Type";
 const SOCK_STATE_KEY = "Socket State";
+const TV_STATE = "TVState";
 const CHAN_NUM_KEY = "Channel Number";
 
 /*
@@ -77,6 +78,7 @@ module.exports = {
     NUM_KEY: NUM_KEY,
     SOCK_TYPE_KEY: SOCK_TYPE_KEY,
     SOCK_STATE_KEY: SOCK_STATE_KEY,
+    TV_STATE: TV_STATE,
     CHAN_NUM_KEY: CHAN_NUM_KEY,
     SOCK_FUNC: SOCK_FUNC,
     CHAN_FUNC: CHAN_FUNC,

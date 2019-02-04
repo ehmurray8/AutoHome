@@ -52,13 +52,13 @@ module.exports = {
     convertSocket:function(socketStr) {
         socketStr = socketStr.toLowerCase();
         console.log(socketStr);
-        if (socketStr == "overhead light") {
+        if (socketStr == "front light") {
             return "2";
         } else if (socketStr == "fan") {
             return "3";
-        } else if (socketStr == "ac" || socketStr == "air conditioning" || socketStr == "a/c") {
+        } else if (socketStr == "left light") {
             return "4";
-        } else if (socketStr == "lamp") {
+        } else if (socketStr == "right light") {
             return "5";
         } else {
             return socketStr;

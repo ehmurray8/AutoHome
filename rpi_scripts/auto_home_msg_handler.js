@@ -1,7 +1,6 @@
 var Ably = require("ably");
-var shell = require('shelljs');
+var exec = require("child_process").exec;
 var ably_info = require("./ably_info.js"); 
-
 var scriptsPath = "/home/pi/AutoHome/rpi_scripts/";
 
 var realtime = new Ably.Realtime({key: ably_info.ABLY_KEY});
@@ -10,15 +9,14 @@ var channel = realtime.channels.get(ably_info.ABLY_CHAN);
 channel.subscribe(function(msg) {
     handle_msg(msg);
 }); 
+
 function handle_msg(message) {
 
     var scriptName = "";
     var params = "";
-    var params2 = "";
 
     var func = "";
     var valid = true;
-    var multFuncs = false;
     try {
         message = message.data;
         func = message["Function Name"];
@@ -51,10 +49,8 @@ function handle_msg(message) {
             params = "POWER";
         }
     } else if (func == "Lights") {
-        multFuncs = true;
-        scriptName = "socket";
-        params = 2 + " " + message["State"].toLowerCase();
-        params2 = 5 + " " + message["State"].toLowerCase();
+        scriptName = "lights";
+        params = message.State.toLowerCase();
     } else if (func == "Sleep") {
         scriptName = "sleep_script";
     } else if (func == "Awake") {
@@ -70,9 +66,6 @@ function handle_msg(message) {
     
     if(valid) { 
         var cmd = "sudo " + scriptsPath + scriptName + " " + params;
-        shell.exec(cmd);
-        if (multFuncs) {
-            shell.exec("sudo " + scriptsPath + scriptName + " " + params2);
-        }
+        exec(cmd);
     }
 }

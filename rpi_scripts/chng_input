@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/etc/init.d/lirc start
+service lircd start
 
 irsend SEND_ONCE insignia KEY_MEDIA
 sleep .01

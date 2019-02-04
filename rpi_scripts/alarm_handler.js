@@ -1,5 +1,5 @@
 var Ably = require("ably");
-var shell = require('shelljs');
+var exec = require('child_process').exec;
 var ably_info = require("./ably_info.js"); 
 var schedule = require("node-schedule");
 
@@ -45,7 +45,7 @@ function handle_msg(message) {
                 alarm = schedule.scheduleJob(date, function(){
                     var scriptName = "alarm_script";
                     var cmd = "sudo " + scriptsPath + scriptName;
-                    shell.exec(cmd);             
+                    exec(cmd);             
                     alarm = null;
                 });
                 if(musicJob != null) {
@@ -54,15 +54,6 @@ function handle_msg(message) {
                 if(music != null) {
                     date += 15000;
                     musicJob = schedule.scheduleJob(date, function(){
-                        var req = "curl -X POST   'https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?accept=audio%2Fwav&text=";
-                        var tail = "' -H 'authorization: Basic YjY5MmFkMzUtZDVhYi00NTQxLWE2ZmItMmZhZWI1NmE3MGJjOmI0czg4SUp5WEVGZw==' > command.wav";
-                        music = encodeURIComponent(music.trim());
-                        music = "Wake%20up!%20Wake%20up!%20Wake%20up!%20Wake%20up!%20Wake%20up!%20Wake%20up!%20Alexa%20Play%20" + music;
-                        var fullReq = req + music + tail;
-                        shell.exec(fullReq);
-                        shell.exec("ffmpeg -i command.wav command.ogg");
-                        shell.exec("omxplayer -o hdmi command.ogg");
-                        shell.exec("rm command.ogg");
                         musicJob = null;
                         music = null;
                     });

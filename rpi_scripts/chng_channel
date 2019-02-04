@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/etc/init.d/lirc start
+service lircd start
 	
 sleep 1
 count=0

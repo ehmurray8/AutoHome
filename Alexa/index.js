@@ -93,6 +93,7 @@ function handleUserIntent(cardTitle, intent, handler) {
     var dir = consts.DIR_KEY;
     var num = consts.NUM_KEY;
 
+    var speechOutput = "Ok";
     console.log(cardTitle);
 
     if(cardTitle === consts.SOCK_INTENT) {
@@ -100,14 +101,9 @@ function handleUserIntent(cardTitle, intent, handler) {
         var sockType = consts.SOCK_TYPE_KEY;
         var sockState = consts.SOCK_STATE_KEY;
         var socketSlot = intent.slots.socket; 
-        if(socketSlot.value == consts.TV_SOCKET) { 
-            body[sockType] = consts.TV_SOCKET;
-            body[consts.TV_STATE] = stateSlot.value.toUpperCase();
-        } else {
-            var stateSlot = intent.slots.state;
-            body[sockType] = helpers.convertSocket(socketSlot.value);
-            body[sockState] = stateSlot.value.toUpperCase();
-        }
+        var stateSlot = intent.slots.state;
+        body[sockType] = helpers.convertSocket(socketSlot.value);
+        body[sockState] = stateSlot.value.toUpperCase();
     } else if(cardTitle === consts.CHAN_INTENT) {
         body[func_key] = consts.CHAN_FUNC;
         var chan = consts.CHAN_NUM_KEY;
@@ -187,11 +183,7 @@ function handleUserIntent(cardTitle, intent, handler) {
             console.log("Ending...");
             console.log(res.body);
             console.log("Published: %s", JSON.stringify(body));
-            if (speechOutput) {
-                handler.emit(':tell', speechOutput);
-            } else {
-                handler.emit(':tell', "Ok");
-            }
+            handler.emit(':tell', speechOutput);
         });
     }   
 }

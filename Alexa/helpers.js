@@ -33,7 +33,9 @@ module.exports = {
     convertSocket:function(socketStr) {
         socketStr = socketStr.toLowerCase();
         console.log(socketStr);
-        if (socketStr == "front light") {
+        if (socketStr == "tv") {
+            return "1";
+        } else if (socketStr == "front light") {
             return "2";
         } else if (socketStr == "fan") {
             return "3";

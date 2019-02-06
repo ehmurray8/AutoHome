@@ -51,7 +51,7 @@ function handle_msg(message) {
             params = "POWER";
         }
     } else if (func == "Lights") {
-        scriptName = "lights";
+        scriptName = "lights_script";
         params = message.State.toLowerCase();
     } else if (func == "Sleep") {
         scriptName = "sleep_script";

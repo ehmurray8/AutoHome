@@ -36,6 +36,9 @@ var handlers = {
     'LightsIntent': function() {
         handleUserIntent(consts.LIGHTS_INTENT, this.event.request.intent, this);
     },
+    'PowerIntent': function() {
+        handleUserIntent(consts.POWER_INTENT, this.event.request.intent, this);
+    },
     'SleepIntent': function() {
         handleUserIntent(consts.SLEEP_INTENT, this.event.request.intent, this);
     },
@@ -151,6 +154,10 @@ function handleUserIntent(cardTitle, intent, handler) {
     } else if (cardTitle === consts.LIGHTS_INTENT) {
         body[func_key] = consts.LIGHTS_FUNC;
         var state = "State";
+        stateSlot = intent.slots.state;
+        body[state] = stateSlot.value;
+    } else if (cardTitle === consts.POWER_INTNET) {
+        body[func_key] = consts.POWER_FUNC;
         stateSlot = intent.slots.state;
         body[state] = stateSlot.value;
     } else if (cardTitle === consts.SLEEP_INTENT) {

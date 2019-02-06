@@ -4,10 +4,18 @@ path="/home/pi/AutoHome/rpi_scripts/socket"
 
 "$path" 4 off
 
+sleep 0.1
+
 "$path" 3 on
+
+sleep 0.1
 
 "$path" 2 off
 
+sleep 0.1
+
 "$path" 5 off
+
+sleep 0.1
 
 "$path" 1 off

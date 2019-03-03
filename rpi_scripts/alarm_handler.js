@@ -30,20 +30,26 @@ function handle_msg(message) {
     if (valid) {
         var date;
         try {
-            date = new Date(alarmTime);
-            var currDate = new Date();
-            if(date - currDate > 1000) {
-                if(alarm != null) {
-                    alarm.cancel();
+            if (alarmTime) {
+                date = new Date(alarmTime);
+                var currDate = new Date();
+                if(date - currDate > 1000) {
+                    if(alarm != null) {
+                        alarm.cancel();
+                    }
+                    console.log("Scheduling job");
+                    alarm = schedule.scheduleJob(date, function() {
+                        console.log("Running job");
+                        var scriptName = "alarm_script";
+                        var cmd = scriptsPath + scriptName;
+                        spawn('bash', cmd.split(' '), {stdio: 'inherit'});
+                        alarm = null;
+                    });
                 }
-                console.log("Scheduling job");
-                alarm = schedule.scheduleJob(date, function() {
-                    console.log("Running job");
-                    var scriptName = "alarm_script";
-                    var cmd = scriptsPath + scriptName;
-                    spawn('bash', cmd.split(' '), {stdio: 'inherit'});
-                    alarm = null;
-                });
+            } else {
+                var scriptName = "alarm_script";
+                var cmd = scriptsPath + scriptName;
+                spawn('bash', cmd.split(' '), {stdio: 'inherit'});
             }
         } catch(e) {
             console.log(e);

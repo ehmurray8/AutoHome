@@ -45,7 +45,13 @@ function handle_msg(message) {
     } else if (func == "Socket") {
         scriptName = "socket";
         if (message.hasOwnProperty("Socket State")) {
-            params = Number(message["Socket Type"]) + " " + message["Socket State"].toLowerCase(); 
+            var socketType = message["Socket Type"];
+            if (socketType == "power" || socketType == "Power" || socketType == "POWER") {
+                scriptName = "power_script";
+                params = message["Socket State"].toLowerCase();
+            } else {
+                params = Number(message["Socket Type"]) + " " + message["Socket State"].toLowerCase(); 
+            }
         } else {
             scriptName = "key";
             params = "POWER";

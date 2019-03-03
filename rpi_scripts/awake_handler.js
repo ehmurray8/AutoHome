@@ -5,7 +5,7 @@ var ably_info = require("./ably_info.js");
 var scriptsPath = "/home/pi/AutoHome/rpi_scripts/";
 
 var realtime = new Ably.Realtime({key: ably_info.ABLY_KEY});
-var channel = realtime.channels.get(ably_info.AWAKE_CHANNEL);
+var channel = realtime.channels.get("AWAKE_CHANNEL");
 
 function handle_msg(message) {
 

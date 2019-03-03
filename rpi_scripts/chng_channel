@@ -1,8 +1,5 @@
 #!/bin/bash
 
-service lircd start
-	
-sleep 1
 count=0
 num=1
 if [ "$2" != "" ]; then 

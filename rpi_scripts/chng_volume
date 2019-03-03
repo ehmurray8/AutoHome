@@ -1,7 +1,5 @@
 #!/bin/bash
 
-service lircd start
-
 sleep .01
 count=0
 num=1

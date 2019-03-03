@@ -1,5 +1,3 @@
 #!/bin/bash
 
-service lircd start
-
 irsend SEND_ONCE insignia KEY_$1
